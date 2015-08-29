@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="240dp">
+
+<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/progressBar"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+
+    />
+
+<ImageView
+    android:layout_width="fill_parent"
+    android:layout_height="240dp"
+    android:id="@+id/imageView"
+    android:scaleType="fitXY"
+
+    />
+
+<Views.TextViewFont
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Title Large Text"
+    android:id="@+id/titletextView"
+    android:gravity="right"
+    android:textColor="#fff"
+    android:padding="20dp"
+    android:background="#838e9191"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

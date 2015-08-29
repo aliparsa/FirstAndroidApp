@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="irdevelopers.asemanweb" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/appicon2"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".QuestionsActivity"
+            android:label="@string/title_activity_simple_content_viewer"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".RigesterActivity"
+            android:label="@string/title_activity_rigester"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".NewsActivity"
+            android:label="@string/title_activity_news"
+            android:parentActivityName=".NewsGroupPickerActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".NewsGroupPickerActivity"
+            android:label="@string/title_activity_news"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".WebActivity"
+            android:label="@string/title_activity_web"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".NewsActivity" >
+        </activity>
+
+        <service android:name=".CheckForUpdateService" />
+        <service
+            android:name=".WatchDogService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="irdevelopers.asemanweb.MainActivity" />
+        </activity>
+        <activity
+
+            android:name=".TamasBaMaActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+        android:label="@string/title_activity_tamas_ba_ma" >
+        </activity>
+
+
+    </application>
+
+</manifest>

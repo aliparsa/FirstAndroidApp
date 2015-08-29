@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#73e6e3ea"
+
+
+    >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="0dp"
+        android:gravity="right"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context="irdevelopers.asemanweb.RigesterActivity">
+
+
+
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="220dp">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+
+                />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="220dp"
+                android:id="@+id/imageView"
+                android:scaleType="fitXY"
+                android:src="@drawable/tamasbama_header"
+
+                />
+
+            <Views.TextViewFont
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="تماس با ما"
+                android:id="@+id/titletextView"
+                android:textColor="#fff"
+                android:gravity="right"
+                android:padding="20dp"
+                android:background="#838e9191"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+        <Views.EditTextFont
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:hint="نام و نام خانوادگی"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="textPersonName"
+            android:background="@drawable/textbox_background"
+            android:id="@+id/tamasbama_name"
+            />
+
+        <Views.EditTextFont
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textbox_background"
+            android:inputType="phone"
+            android:textSize="14sp"
+            android:id="@+id/tamasbama_tel"
+
+
+
+            android:hint="شماره تماس"/>
+
+        <Views.EditTextFont
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:id="@+id/tamasbama_email"
+
+            android:background="@drawable/textbox_background"
+            android:inputType="textEmailAddress"
+            android:hint="ایمیل"/>
+
+        <Views.EditTextFont
+
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:id="@+id/tamasbama_message"
+            android:background="@drawable/textbox_background"
+            android:inputType="textMultiLine"
+            android:hint="پیام شما"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

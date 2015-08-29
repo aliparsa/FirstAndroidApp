@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Web Sky</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_simple_content_viewer">SimpleContentViewerActivity</string>
+    <string name="title_activity_rigester">RigesterActivity</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="title_activity_normal">NormalActivity</string>
+    <string name="title_activity_web">WebActivity</string>
+    <string name="title_activity_tamas_ba_ma">TamasBaMaActivity</string>
+
+</resources>

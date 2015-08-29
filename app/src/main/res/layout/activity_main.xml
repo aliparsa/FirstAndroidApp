@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/viewFlipper" >
+
+        <ImageView
+            android:id="@+id/slide1"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#ffb8b0b4"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+
+            />
+
+        <ImageView
+            android:id="@+id/slide2"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#ffcdcfce"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+
+            />
+
+        <ImageView
+            android:id="@+id/slide3"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#ffb8b6b1"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+
+            />
+
+        </ViewFlipper>
+
+
+
+
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_main_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+
+            android:layout_alignParentBottom="true">
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TableRow
+                    android:id="@+id/firstTableRow"
+                    android:background="#FFF"
+                    android:layout_marginTop="240dp">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@+id/menu_tazeha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/tazeha" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تازه ها"
+                            android:padding="7dp"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_tejarat_electronic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/tejarat" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تجارت الکترونیک"
+                            android:layout_margin="7dp"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_soalat_motedavel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/soalatmotadavel" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/buttonQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="7dp"
+                            android:text="سوالات متداول"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:background="#FFF">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_sabt_nam"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/sabtenam" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/buttonSabtNam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ثبت نام"
+                            android:layout_margin="7dp"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_tarahi_web"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/tarahiweb" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="7dp"
+
+                            android:drawablePadding="-15sp"
+                            android:text="طراحی وب"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_amoozesh"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/amuzesh" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_margin="7dp"
+                            android:drawablePadding="-15sp"
+                            android:text="آموزش"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:background="#FFF">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_websiteha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/websiteha" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_margin="7dp"
+                            android:drawablePadding="-15sp"
+                            android:text="وب سایت ها"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_chera_asemanweb"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/cheraasemanweb" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="0.3"
+                            android:layout_margin="7dp"
+
+                            android:drawablePadding="-15sp"
+                            android:text="چرا آسمان وب"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_espanser"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/sponser" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="0.3"
+                            android:layout_margin="7dp"
+
+                            android:drawablePadding="-15sp"
+                            android:text="اسپانسر"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:background="#FFF">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_darbareye_ma"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/darbarema" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="0.3"
+                            android:layout_margin="7dp"
+
+                            android:drawablePadding="-15sp"
+                            android:text="درباره ما"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_tamas_bama"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/tamasbama" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="0.3"
+                            android:layout_margin="7dp"
+
+                            android:drawablePadding="-15sp"
+                            android:text="تماس با ما"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/menu_narmafzarha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/narmafzarha" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="0.3"
+                            android:drawablePadding="-15sp"
+                            android:layout_margin="7dp"
+                            android:text="نرم افزار ها"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</FrameLayout>
+
+
+
