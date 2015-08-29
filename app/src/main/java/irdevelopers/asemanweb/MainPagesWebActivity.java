@@ -17,11 +17,9 @@ import java.io.File;
 
 import DataModel.News;
 import Helpers.DownloadTaskHidden;
-import Helpers.PathHelper;
-import Helpers.Ram;
 
 
-public class WebActivity extends ActionBarActivity {
+public class MainPagesWebActivity extends ActionBarActivity {
 
     WebView webView;
     String offlinePath;
@@ -35,9 +33,10 @@ public class WebActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_main_pages_web);
+
         getSupportActionBar().setTitle("بازگشت");
-        context = WebActivity.this;
+        context = MainPagesWebActivity.this;
         forceRTLIfSupported();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar3);
@@ -55,18 +54,8 @@ public class WebActivity extends ActionBarActivity {
         webView.getSettings().setDisplayZoomControls(false);
 
 
-        if (Ram.news != null) {
-            news = Ram.news;
-            Ram.news = null;
-            onlinePath = news.url;
-            offlinePath = PathHelper.homePath + "/" + news.uid + ".html";
-            mode = "news";
-
-        } else {
-            onlinePath = getIntent().getStringExtra("onlinePath");
-            offlinePath = getIntent().getStringExtra("offlinePath");
-            mode = "page";
-        }
+        onlinePath = getIntent().getStringExtra("onlinePath");
+        offlinePath = getIntent().getStringExtra("offlinePath");
 
 
         loadPage();
@@ -80,31 +69,17 @@ public class WebActivity extends ActionBarActivity {
         });
 
 
-        // webView.loadUrl("http://192.168.0.5:85/sky/web.html");
-
     }
 
     private void loadPage() {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        if (mode.equals("news")) {
-            File file = new File(offlinePath);
-            if (file.exists()) {
-                // load from file
-                webView.loadUrl("file://" + offlinePath);
-            } else {
-                //load from web
-                webView.loadUrl(onlinePath);
-                new DownloadTaskHidden(context).execute(news.url, PathHelper.homePath + "/" + news.uid + ".html");
-            }
+        File file = new File(offlinePath);
+        if (file.exists()) {
+            webView.loadUrl("file://" + offlinePath);
         } else {
-            File file = new File(offlinePath);
-            if (file.exists()) {
-                webView.loadUrl("file://" + offlinePath);
-            } else {
-                webView.loadUrl(onlinePath);
-            }
+            webView.loadUrl(onlinePath);
         }
 
 

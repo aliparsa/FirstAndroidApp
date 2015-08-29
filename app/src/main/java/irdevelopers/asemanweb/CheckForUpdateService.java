@@ -26,12 +26,17 @@ import Helpers.CustomNotificationHelper;
 import Helpers.GroupsLoader;
 import Helpers.Ram;
 import Helpers.SharedPrefHelper;
+import Helpers.SoalLoader;
 import Intefaces.CallBackAsync;
 import Intefaces.CallBackYes;
 import Utilities.Webservice;
 
 public class CheckForUpdateService extends Service {
     public CheckForUpdateService() {
+    }
+
+    public static void silentSync() {
+
     }
 
     @Override
@@ -47,6 +52,7 @@ public class CheckForUpdateService extends Service {
         checkForNewsUpdate();
         CustomNotificationHelper.checkForCustomNotification(getApplicationContext());
         GroupsLoader.syncSilent(getApplicationContext());
+        SoalLoader.syncSilent(getApplicationContext());
 
         return START_NOT_STICKY;
     }
@@ -290,12 +296,6 @@ public class CheckForUpdateService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-
-    public static void silentSync(){
-
     }
 }
 

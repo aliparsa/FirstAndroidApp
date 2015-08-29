@@ -57,6 +57,12 @@ public class NewsActivity extends ActionBarActivity {
             forceRTLIfSupported();
             context = NewsActivity.this;
             group = Ram.group;
+
+            if (group == null) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+
             getSupportActionBar().setTitle(group.title);
             lv = (ListView) findViewById(R.id.mainNewsListView);
             footerprogressBar = (ProgressBar) findViewById(R.id.progressBar2);

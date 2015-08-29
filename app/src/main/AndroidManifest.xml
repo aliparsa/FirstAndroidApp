@@ -47,12 +47,11 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".WebActivity"
             android:label="@string/title_activity_web"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".NewsActivity" >
+            android:parentActivityName=".NewsActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <service android:name=".CheckForUpdateService" />
@@ -65,21 +64,24 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="irdevelopers.asemanweb.MainActivity" />
         </activity>
         <activity
-
             android:name=".TamasBaMaActivity"
+            android:label="@string/title_activity_tamas_ba_ma"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-        android:label="@string/title_activity_tamas_ba_ma" >
+            android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".MainPagesWebActivity"
+            android:label="@string/title_activity_main_pages_web"
+            android:parentActivityName=".MainActivity"
 
-
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

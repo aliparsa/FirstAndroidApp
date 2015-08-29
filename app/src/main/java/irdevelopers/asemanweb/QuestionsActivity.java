@@ -14,20 +14,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Soal;
-import Helpers.FontHelper;
-import Helpers.SharedPrefHelper;
-import Intefaces.CallBackAsync;
-import Utilities.Webservice;
+import Helpers.SoalLoader;
+import Intefaces.CallBackSoal;
 
 
 public class QuestionsActivity extends ActionBarActivity {
@@ -81,69 +74,20 @@ public class QuestionsActivity extends ActionBarActivity {
 
     private void loadQuestions(String type) {
 
-
-        if (type.equals("offline") && SharedPrefHelper.contain(context, "question")) {
-            // offline load
-
-            try {
-                JSONObject json = new JSONObject(SharedPrefHelper.read(context, "question"));
-                ArrayList<Soal> soals = Soal.getArrayListFromJson(json.getJSONArray("content"));
+        SoalLoader.getSoals(context, new CallBackSoal() {
+            @Override
+            public void onSuccess(ArrayList<Soal> soals) {
                 lv.setAdapter(new ListViewObjectAdapter<Soal>(context, soals));
 
-            } catch (Exception e) {
-e.printStackTrace();
             }
 
-        } else {
-            // online load
+            @Override
+            public void onError(String errorMessage) {
 
-            List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-            basicNameValuePairs.add(new BasicNameValuePair("tag", "question"));
-
-            //maiinProgressBar.setVisibility(View.VISIBLE);
-            showLoading();
-
-            Webservice.postData(context, basicNameValuePairs, new CallBackAsync() {
-                @Override
-                public void onBeforStart() {
-                    // show Loading
-//                Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show();
-
-                }
-
-                @Override
-                public void onSuccessFinish(Object result) {
-                    //maiinProgressBar.setVisibility(View.GONE);
-                    hideLoading();
-
-                    // show result
-                    try {
-
-                        if (result != null && ((String) result).length() > 1)
-                            SharedPrefHelper.write(context, "question", (String) result);
-
-                        JSONObject json = new JSONObject(result.toString());
-
-                        ArrayList<Soal> soals = Soal.getArrayListFromJson(json.getJSONArray("content"));
-                        lv.setAdapter(new ListViewObjectAdapter<Soal>(context, soals));
+            }
+        });
 
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-                    //maiinProgressBar.setVisibility(View.GONE);
-                    hideLoading();
-
-                    // show error
-
-                //    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 
 

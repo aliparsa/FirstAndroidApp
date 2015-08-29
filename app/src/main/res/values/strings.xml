@@ -10,5 +10,6 @@
     <string name="title_activity_normal">NormalActivity</string>
     <string name="title_activity_web">WebActivity</string>
     <string name="title_activity_tamas_ba_ma">TamasBaMaActivity</string>
+    <string name="title_activity_main_pages_web">MainPagesWebActivity</string>
 
 </resources>

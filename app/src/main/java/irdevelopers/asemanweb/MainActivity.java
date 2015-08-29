@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,18 +15,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,17 +28,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import Helpers.AppUpdaterHelper;
-import Helpers.DeveloperHelper;
 import Helpers.DownloadTaskHidden;
 import Helpers.GroupsLoader;
 import Helpers.PathHelper;
-import Helpers.Ram;
 import Helpers.ServerAddress;
 import Helpers.SharedPrefHelper;
 import Helpers.SliderHelper;
+import Helpers.SoalLoader;
 
 
 public class MainActivity extends ActionBarActivity {
+    public TableRow tableRow;
     Context context = MainActivity.this;
     ImageView headerImageView;
     ImageView slide1;
@@ -65,8 +57,6 @@ public class MainActivity extends ActionBarActivity {
     private LinearLayout tamasBaMa;
     private LinearLayout narmafzarha;
     private LinearLayout sabtNam;
-
-    public TableRow tableRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         GroupsLoader.syncSilent(context);
-
+        SoalLoader.syncSilent(context);
 
 
         // clear app prefrence
@@ -105,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         if (!SharedPrefHelper.contain(getApplicationContext(), "lastNewsUid"))
-            SharedPrefHelper.write(getApplicationContext(),"lastNewsUid","0");
+            SharedPrefHelper.write(getApplicationContext(), "lastNewsUid", "0");
 
         setContentView(R.layout.activity_main);
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
@@ -134,8 +124,6 @@ public class MainActivity extends ActionBarActivity {
 
         copyAssets();
 
-        //downloadSlides();
-
 
         // flipviewer
         ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -163,11 +151,10 @@ public class MainActivity extends ActionBarActivity {
         tarahiweb = (LinearLayout) findViewById(R.id.menu_tarahi_web);
 
 
-
         tarahiweb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, MainPagesWebActivity.class);
                 intent.putExtra("offlinePath", PathHelper.TarahiWebUrl);
                 intent.putExtra("onlinePath", ServerAddress.TarahiWebUrl);
                 startActivity(intent);
@@ -285,7 +272,6 @@ public class MainActivity extends ActionBarActivity {
         });
 
 
-
         AppUpdaterHelper.checkForUpdate(context);
 
         SliderHelper.loadSlide1(context, slide1);
@@ -294,7 +280,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-
 
 
     private void whatIsNew() {
@@ -409,44 +394,43 @@ public class MainActivity extends ActionBarActivity {
         AssetManager assetManager = getAssets();
         String[] files = null;
 
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-                in = assetManager.open("bootstrap.min.css");
-                File outFile = new File( PathHelper.homePath+"/"+"bootstrap.min.css");
-                out = new FileOutputStream(outFile);
-                copyFile(in, out);
-            } catch(IOException e) {
-                Log.e("tag", "Failed to copy asset file: " + "bootstrap.min.css", e);
-            }
-            finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
-                }
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = assetManager.open("bootstrap.min.css");
+            File outFile = new File(PathHelper.homePath + "/" + "bootstrap.min.css");
+            out = new FileOutputStream(outFile);
+            copyFile(in, out);
+        } catch (IOException e) {
+            Log.e("tag", "Failed to copy asset file: " + "bootstrap.min.css", e);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // NOOP
                 }
             }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    // NOOP
+                }
+            }
+        }
 
     }
 
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
-        while((read = in.read(buffer)) != -1){
+        while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
     }
 
-    private void reloadMainPage(){
+    private void reloadMainPage() {
         SliderHelper.loadSlide1(context, slide1);
         SliderHelper.loadSlide2(context, slide2);
         SliderHelper.loadSlide3(context, slide3);

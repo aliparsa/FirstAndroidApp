@@ -3,31 +3,28 @@ package Helpers;
 import android.content.Context;
 
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import DataModel.Group;
+import DataModel.Soal;
 import Intefaces.CallBackAsync;
-import Intefaces.CallBackGroup;
+import Intefaces.CallBackSoal;
 import Utilities.Webservice;
 
 /**
  * Created by Ali on 8/29/2015.
  */
-public class GroupsLoader {
-    public static ArrayList<Group> groups ;
+public class SoalLoader {
+    public static ArrayList<Soal> soals;
 
 
-
-
-
-    public static void syncSilent(final Context context){
+    public static void syncSilent(final Context context) {
 
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-        basicNameValuePairs.add(new BasicNameValuePair("tag", "groups"));
+        basicNameValuePairs.add(new BasicNameValuePair("tag", "question"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
             @Override
             public void onBeforStart() {
@@ -36,7 +33,7 @@ public class GroupsLoader {
             @Override
             public void onSuccessFinish(String result) {
                 if (result != null && ((String) result).length() > 1)
-                    SharedPrefHelper.write(context, "groups", result);
+                    SharedPrefHelper.write(context, "question", (String) result);
             }
 
             @Override
@@ -45,34 +42,34 @@ public class GroupsLoader {
         });
     }
 
-    public static void getGroups(final Context context, final CallBackGroup callBack) {
+    public static void getSoals(final Context context, final CallBackSoal callBack) {
 
-        if(SharedPrefHelper.contain(context,"groups")){
+        if (SharedPrefHelper.contain(context, "question")) {
             //read from shared pref
             try {
-                JSONArray jsonArray = new JSONArray(SharedPrefHelper.read(context, "groups"));
-                groups = Group.getArrayListFromJson(jsonArray);
-                if (groups.size()>1){
+                JSONObject json = new JSONObject(SharedPrefHelper.read(context, "question"));
+                ArrayList<Soal> soals = Soal.getArrayListFromJson(json.getJSONArray("content"));
+                if (soals.size() > 1) {
                     // it's ok we can return it !
-                    callBack.onSuccess(groups);
-                }else{
+                    callBack.onSuccess(soals);
+                } else {
                     // we have groups in shared pref but it is empty ! so we try to load it online
-                    syncOnline(context,callBack);
+                    syncOnline(context, callBack);
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             // try to load online because shared pref is empty
-            syncOnline(context,callBack);
+            syncOnline(context, callBack);
         }
     }
 
-    public static void syncOnline(final Context context, final CallBackGroup callBack) {
+    public static void syncOnline(final Context context, final CallBackSoal callBack) {
 
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-        basicNameValuePairs.add(new BasicNameValuePair("tag", "groups"));
+        basicNameValuePairs.add(new BasicNameValuePair("tag", "question"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
             @Override
             public void onBeforStart() {
@@ -82,9 +79,12 @@ public class GroupsLoader {
             @Override
             public void onSuccessFinish(String result) {
                 try {
-                    SharedPrefHelper.write(context, "groups", result);
-                    JSONArray jsonArray = new JSONArray(result);
-                    callBack.onSuccess(Group.getArrayListFromJson(jsonArray));
+                    if (result != null && ((String) result).length() > 1)
+                        SharedPrefHelper.write(context, "question", (String) result);
+
+                    JSONObject json = new JSONObject(result.toString());
+                    ArrayList<Soal> soals = Soal.getArrayListFromJson(json.getJSONArray("content"));
+                    callBack.onSuccess(soals);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -102,36 +102,3 @@ public class GroupsLoader {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
