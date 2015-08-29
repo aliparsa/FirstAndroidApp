@@ -52,14 +52,35 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadGroups("online");
+                GroupsLoader.syncOnline(context, new CallBackGroup() {
+                    @Override
+                    public void onSuccess(ArrayList<Group> groups) {
+                        newslv.setAdapter(new ListViewObjectAdapter<Group>(context, groups));
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+                        hideLoading();
+                    }
+                });
             }
         });
 
 
-        //loadGroups("offline");
 
-        loadGroups2();
+        GroupsLoader.getGroups(context, new CallBackGroup() {
+            @Override
+            public void onSuccess(ArrayList<Group> groups) {
+                newslv.setAdapter(new ListViewObjectAdapter<Group>(context, groups));
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+        });
+
 
         newslv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,62 +97,6 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         });
     }
 
-    private void loadGroups2() {
-        GroupsLoader.getGroups(context, new CallBackGroup() {
-            @Override
-            public void onSuccess(ArrayList<Group> groups) {
-                newslv.setAdapter(new ListViewObjectAdapter<Group>(context, groups));
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-
-            }
-        });
-    }
-
-    private void loadGroups(String type) {
-
-        if (type.equals("offline") && SharedPrefHelper.read(context, "groups") != null) {
-            try {
-                JSONArray jsonArray = new JSONArray(SharedPrefHelper.read(context, "groups"));
-                newslv.setAdapter(new ListViewObjectAdapter<Group>(context, Group.getArrayListFromJson(jsonArray)));
-                return;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        showLoading();
-        List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-        basicNameValuePairs.add(new BasicNameValuePair("tag", "groups"));
-        Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
-
-            }
-
-            @Override
-            public void onSuccessFinish(String result) {
-                hideLoading();
-                try {
-                    SharedPrefHelper.write(context, "groups", result);
-                    JSONArray jsonArray = new JSONArray(result);
-                    newslv.setAdapter(new ListViewObjectAdapter<Group>(context, Group.getArrayListFromJson(jsonArray)));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                //pg.setVisibility(View.GONE);
-                hideLoading();
-                //Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -43,6 +43,7 @@ import Helpers.PathHelper;
 import Helpers.Ram;
 import Helpers.ServerAddress;
 import Helpers.SharedPrefHelper;
+import Helpers.SliderHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -113,9 +114,7 @@ public class MainActivity extends ActionBarActivity {
 
         forceRTLIfSupported();
         getSupportActionBar().setSubtitle("برترین ارائه دهنده خدمات تجارت الکترونیک");
-//        getSupportActionBar().setLogo(R.drawable.play_button);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         slide1 = (ImageView) findViewById(R.id.slide1);
         slide2 = (ImageView) findViewById(R.id.slide2);
@@ -281,7 +280,7 @@ public class MainActivity extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadSlider();
+                reloadMainPage();
             }
         });
 
@@ -289,7 +288,9 @@ public class MainActivity extends ActionBarActivity {
 
         AppUpdaterHelper.checkForUpdate(context);
 
-        loadSlider();
+        SliderHelper.loadSlide1(context, slide1);
+        SliderHelper.loadSlide2(context, slide2);
+        SliderHelper.loadSlide3(context, slide3);
 
 
     }
@@ -328,7 +329,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
     private void downloadMainPages() {
         // download tejarat electronix
         new DownloadTaskHidden(context).execute(ServerAddress.TejaratElectronicUrl, PathHelper.TejaratElectronicUrl);
@@ -340,112 +340,6 @@ public class MainActivity extends ActionBarActivity {
         new DownloadTaskHidden(context).execute(ServerAddress.NarmafzarhaUrl, PathHelper.NarmafzarhaUrl);
         new DownloadTaskHidden(context).execute(ServerAddress.DarbareMaUrl, PathHelper.DarbareMaUrl);
 
-    }
-
-
-    private void loadSlider() {
-
-
-        if (Ram.slide1 != null) {
-            slide1.setImageBitmap(Ram.slide1);
-
-        } else {
-
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
-            imageLoader.displayImage(ServerAddress.Slide1Url, slide1, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    showLoading();
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    hideLoading();
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                    slide1.setImageBitmap(bitmap);
-                    Ram.slide1 = bitmap;
-                    hideLoading();
-
-
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-                    hideLoading();
-                }
-            });
-        }
-
-        if (Ram.slide2 != null) {
-            slide2.setImageBitmap(Ram.slide2);
-        } else {
-
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
-            imageLoader.displayImage(ServerAddress.Slide2Url, slide2, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    showLoading();
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    hideLoading();
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                    slide2.setImageBitmap(bitmap);
-                    Ram.slide2 = bitmap;
-                    hideLoading();
-
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-                    hideLoading();
-                }
-            });
-
-
-        }
-        if (Ram.slide3 != null) {
-            slide3.setImageBitmap(Ram.slide3);
-        } else {
-
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
-            imageLoader.displayImage(ServerAddress.Slide3Url, slide3, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    showLoading();
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    hideLoading();
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                    slide3.setImageBitmap(bitmap);
-                    Ram.slide3 = bitmap;
-                    hideLoading();
-
-                }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-                    hideLoading();
-                }
-            });
-
-
-        }
     }
 
     @Override
@@ -543,11 +437,20 @@ public class MainActivity extends ActionBarActivity {
             }
 
     }
+
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
         while((read = in.read(buffer)) != -1){
             out.write(buffer, 0, read);
         }
+    }
+
+    private void reloadMainPage(){
+        SliderHelper.loadSlide1(context, slide1);
+        SliderHelper.loadSlide2(context, slide2);
+        SliderHelper.loadSlide3(context, slide3);
+        downloadMainPages();
+        hideLoading();
     }
 }
