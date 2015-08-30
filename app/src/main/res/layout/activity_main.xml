@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff">
-
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/slide1"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_weight="1"
-            android:background="#ffb8b0b4"
-            android:scaleType="fitXY"
-
-            />
-
-        <ImageView
-            android:id="@+id/slide2"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_weight="1"
-            android:background="#ffcdcfce"
-            android:scaleType="fitXY"
-
-            />
-
-        <ImageView
-            android:id="@+id/slide3"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_weight="1"
-            android:background="#ffb8b6b1"
-            android:scaleType="fitXY"
-
-            />
-
-        </ViewFlipper>
-
-
-
-
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/activity_main_swipe_refresh_layout"
@@ -54,25 +8,52 @@
         android:layout_height="wrap_content">
 
 
-
-
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-
             android:layout_alignParentTop="true">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ViewFlipper
+                    android:id="@+id/viewFlipper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/slide1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        />
+
+                    <ImageView
+                        android:id="@+id/slide2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="fitXY"
+                        />
+
+                    <ImageView
+                        android:id="@+id/slide3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="fitXY"
+                        />
+
+                </ViewFlipper>
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
 
+
                 <TableRow
                     android:id="@+id/firstTableRow"
-                    android:layout_marginTop="240dp"
                     android:background="#FFF">
 
                     <LinearLayout
@@ -414,13 +395,10 @@
 
             </TableLayout>
 
-
+            </LinearLayout>
         </ScrollView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
-</FrameLayout>
 
 
 

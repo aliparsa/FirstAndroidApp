@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TableRow;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -31,9 +33,11 @@ public class SliderHelper {
 
     public static void loadSlide1(Context context, final ImageView imageView){
 
+
         if (Ram.slide1 != null) {
             // if exist in Ram load from ram
             imageView.setImageBitmap(Ram.slide1);
+
         }else{
             // if exist in Disk load from disk
             BitmapFactory.Options options = new BitmapFactory.Options();
