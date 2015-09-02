@@ -6,6 +6,6 @@ package Intefaces;
 
 public interface CallBackFunction {
 
-    public void execute();
+    void execute();
 
 }

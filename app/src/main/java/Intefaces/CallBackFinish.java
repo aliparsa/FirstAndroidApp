@@ -5,11 +5,9 @@ package Intefaces;
  * Created by aliparsa on 8/10/2014.
  */
 
-public interface CallBack<T> {
+public interface CallBackFinish {
 
-    void onSuccess(T result);
-
+    void onFinish(String result);
     void onError(String errorMessage);
-
 
 }

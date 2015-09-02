@@ -30,8 +30,8 @@ public class News implements IListViewItem, Serializable {
     public Bitmap bitmap;
     public String url;
     public String uid;
-    public boolean readed = false;
-    public boolean nofified = false;
+    public String readed;
+    public String nofified;
 
     public News(String title, String image, String url, String uid) {
         this.title = title;
@@ -41,13 +41,19 @@ public class News implements IListViewItem, Serializable {
 
     }
 
-    public News(String title, String image, String url, String uid, String groupCode) {
+    public News(String title, String image, String url, String uid, String groupCode ,String readed,String nofified) {
         this.title = title;
         this.image = image;
         this.url = url;
         this.uid = uid;
         this.groupCode = groupCode;
+        this.readed =readed;
+        this.nofified=nofified;
 
+
+    }
+
+    public News() {
 
     }
 
@@ -58,7 +64,7 @@ public class News implements IListViewItem, Serializable {
             for (int i = 0; i < jsonarr.length(); i++) {
                 JSONObject json = jsonarr.getJSONObject(i);
                 if (json.has("groupCode"))
-                    newses.add(new News(json.getString("title"), json.getString("image"), json.getString("url"), json.getString("uid"), json.getString("groupCode")));
+                    newses.add(new News(json.getString("title"), json.getString("image"), json.getString("url"), json.getString("uid"), json.getString("groupCode"),"no","no"));
                 else
                     newses.add(new News(json.getString("title"), json.getString("image"), json.getString("url"), json.getString("uid")));
             }
@@ -129,9 +135,7 @@ public class News implements IListViewItem, Serializable {
             // load from address
 
             new DownloadImageTask(new CallBackAsync<Bitmap>() {
-                @Override
-                public void onBeforStart() {
-                }
+
 
                 @Override
                 public void onSuccessFinish(Bitmap result) {

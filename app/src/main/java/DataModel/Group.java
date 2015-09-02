@@ -98,9 +98,7 @@ public class Group implements IListViewItem, Serializable {
             // load from address
 
             new DownloadImageTask(new CallBackAsync<Bitmap>() {
-                @Override
-                public void onBeforStart() {
-                }
+
 
                 @Override
                 public void onSuccessFinish(Bitmap result) {

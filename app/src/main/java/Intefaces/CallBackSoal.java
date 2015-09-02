@@ -11,9 +11,9 @@ import DataModel.Soal;
 
 public interface CallBackSoal {
 
-    public void onSuccess(ArrayList<Soal> soals);
+    void onSuccess(ArrayList<Soal> soals);
 
-    public void onError(String errorMessage);
+    void onError(String errorMessage);
 
 
 }

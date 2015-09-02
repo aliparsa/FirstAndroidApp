@@ -92,10 +92,6 @@ public class TamasBaMaActivity extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), "در حال ارسال...", Toast.LENGTH_SHORT).show();
 
             Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-                @Override
-                public void onBeforStart() {
-
-                }
 
                 @Override
                 public void onSuccessFinish(String result) {

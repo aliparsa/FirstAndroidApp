@@ -23,7 +23,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> implement
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        calback.onBeforStart();
+        //calback.onBeforStart();
     }
 
     public DownloadImageTask(CallBackAsync<Bitmap> callBack) {

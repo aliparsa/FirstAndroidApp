@@ -7,9 +7,8 @@ package Intefaces;
 
 public interface CallBackAsync<T> {
 
-    public void onBeforStart();
-    public void onSuccessFinish(T result);
-    public void onError(String errorMessage);
+    void onSuccessFinish(T result);
+    void onError(String errorMessage);
 
 
 }

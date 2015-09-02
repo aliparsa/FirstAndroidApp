@@ -61,10 +61,7 @@ public class Account {
 
         if (token == null) return false;
 
-        if (token.length() < 1)
-            return false;
-        else
-            return true;
+        return token.length() >= 1;
 
     }
 

@@ -55,6 +55,15 @@
         </activity>
 
         <service android:name=".CheckForUpdateService" />
+
+        <service android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <service android:name=".WatchDogNotification"
+            android:enabled="true"
+            android:exported="true"/>
+
         <service
             android:name=".WatchDogService"
             android:enabled="true"

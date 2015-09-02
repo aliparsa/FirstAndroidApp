@@ -1,13 +1,9 @@
 package Helpers;
 
 import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import irdevelopers.asemanweb.CheckForUpdateService;
 
 /**
  * Created by Alip on 8/8/2015.

@@ -24,12 +24,16 @@ import DataModel.News;
 import Helpers.AppUpdaterHelper;
 import Helpers.CustomNotificationHelper;
 import Helpers.GroupsLoader;
+import Helpers.NewsLoader;
 import Helpers.Ram;
 import Helpers.SharedPrefHelper;
 import Helpers.SoalLoader;
 import Intefaces.CallBackAsync;
 import Intefaces.CallBackYes;
 import Utilities.Webservice;
+import irdevelopers.asemanweb.MainActivity;
+import irdevelopers.asemanweb.NewsGroupPickerActivity;
+import irdevelopers.asemanweb.R;
 
 public class CheckForUpdateService extends Service {
     public CheckForUpdateService() {
@@ -49,10 +53,11 @@ public class CheckForUpdateService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         checkForAppUpdate();
-        checkForNewsUpdate();
+        //checkForNewsUpdate();
         CustomNotificationHelper.checkForCustomNotification(getApplicationContext());
         GroupsLoader.syncSilent(getApplicationContext());
         SoalLoader.syncSilent(getApplicationContext());
+        NewsLoader.syncSilent(getApplicationContext());
 
         return START_NOT_STICKY;
     }
@@ -70,10 +75,7 @@ public class CheckForUpdateService extends Service {
             basicNameValuePairs.add(new BasicNameValuePair("uid", SharedPrefHelper.read(getApplicationContext(), "lastNewsUid")));
             //basicNameValuePairs.add(new BasicNameValuePair("uid", "25"));
             Webservice.postData(getApplicationContext(), basicNameValuePairs, new CallBackAsync<String>() {
-                @Override
-                public void onBeforStart() {
 
-                }
 
                 @Override
                 public void onSuccessFinish(String result) {

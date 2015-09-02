@@ -36,10 +36,7 @@ public class CustomNotificationHelper {
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
         basicNameValuePairs.add(new BasicNameValuePair("tag", "customNotification"));
         Webservice.postDataToAddress(context, basicNameValuePairs, "http://irdevelopers.ir/sky/func.php", new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
 
-            }
 
             @Override
             public void onSuccessFinish(String result) {

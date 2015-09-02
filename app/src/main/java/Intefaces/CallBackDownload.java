@@ -7,9 +7,9 @@ package Intefaces;
 
 public interface CallBackDownload {
 
-    public void onSuccessFinish(String result);
-    public void onError(String errorMessage);
-    public void onProgressUpdate(int progress);
+    void onSuccessFinish(String result);
+    void onError(String errorMessage);
+    void onProgressUpdate(int progress);
 
 
 }

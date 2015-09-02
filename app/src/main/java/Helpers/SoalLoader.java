@@ -26,14 +26,12 @@ public class SoalLoader {
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
         basicNameValuePairs.add(new BasicNameValuePair("tag", "question"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
-            }
+
 
             @Override
             public void onSuccessFinish(String result) {
-                if (result != null && ((String) result).length() > 1)
-                    SharedPrefHelper.write(context, "question", (String) result);
+                if (result != null && result.length() > 1)
+                    SharedPrefHelper.write(context, "question", result);
             }
 
             @Override
@@ -71,16 +69,13 @@ public class SoalLoader {
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
         basicNameValuePairs.add(new BasicNameValuePair("tag", "question"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
 
-            }
 
             @Override
             public void onSuccessFinish(String result) {
                 try {
-                    if (result != null && ((String) result).length() > 1)
-                        SharedPrefHelper.write(context, "question", (String) result);
+                    if (result != null && result.length() > 1)
+                        SharedPrefHelper.write(context, "question", result);
 
                     JSONObject json = new JSONObject(result.toString());
                     ArrayList<Soal> soals = Soal.getArrayListFromJson(json.getJSONArray("content"));

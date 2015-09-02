@@ -40,10 +40,7 @@ public class AppUpdaterHelper
     basicNameValuePairs.add(new BasicNameValuePair("tag", "update"));
 
     Webservice.postDataToAddress(context, basicNameValuePairs, ServerAddress.funcFile, new CallBackAsync<String>() {
-        @Override
-        public void onBeforStart() {
 
-        }
 
         @Override
         public void onSuccessFinish(String result) {
@@ -144,10 +141,7 @@ public class AppUpdaterHelper
         basicNameValuePairs.add(new BasicNameValuePair("tag", "update"));
 
         Webservice.postDataToAddress(context, basicNameValuePairs, ServerAddress.funcFile, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
 
-            }
 
             @Override
             public void onSuccessFinish(String result) {

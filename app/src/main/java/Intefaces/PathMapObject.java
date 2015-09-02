@@ -5,9 +5,9 @@ package Intefaces;
  */
 public interface PathMapObject {
 
-    public int getId();
-    public String getName();
-    public int getType();
-    public Object getSelf();
+    int getId();
+    String getName();
+    int getType();
+    Object getSelf();
 
 }

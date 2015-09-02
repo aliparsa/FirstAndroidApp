@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import Helpers.AppUpdaterHelper;
 import Helpers.DownloadTaskHidden;
 import Helpers.GroupsLoader;
+import Helpers.NewsLoader;
 import Helpers.PathHelper;
 import Helpers.ServerAddress;
 import Helpers.SharedPrefHelper;
@@ -80,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
 
         GroupsLoader.syncSilent(context);
         SoalLoader.syncSilent(context);
+        NewsLoader.syncSilent(context);
 
 
         // clear app prefrence
@@ -112,9 +114,12 @@ public class MainActivity extends ActionBarActivity {
 
         tableRow = (TableRow) findViewById(R.id.firstTableRow);
 
-        // start watchdog service
+        // start watchdogs service
         Intent intent = new Intent(this, WatchDogService.class);
         startService(intent);
+
+        Intent intent2 = new Intent(this, WatchDogNotification.class);
+        startService(intent2);
 
 
         // create Home folder

@@ -7,5 +7,5 @@ package Intefaces;
 
 public interface CallBackYes {
 
-    public void onYesResult(String result);
+    void onYesResult(String result);
 }

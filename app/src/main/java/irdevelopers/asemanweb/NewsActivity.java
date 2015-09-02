@@ -10,30 +10,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
 import DataModel.News;
+import Helpers.DatabaseHelper;
 import Helpers.DownloadTaskHidden;
+import Helpers.NewsLoader;
 import Helpers.PathHelper;
 import Helpers.Ram;
 import Helpers.SharedPrefHelper;
-import Intefaces.CallBackAsync;
-import Utilities.Webservice;
+import Intefaces.CallBackFinish;
 
 
 public class NewsActivity extends ActionBarActivity {
@@ -66,8 +59,6 @@ public class NewsActivity extends ActionBarActivity {
             getSupportActionBar().setTitle(group.title);
             lv = (ListView) findViewById(R.id.mainNewsListView);
             footerprogressBar = (ProgressBar) findViewById(R.id.progressBar2);
-            //footerprogressBar.setVisibility(View.GONE);
-            //lv.addFooterView(new ProgressBar(context));
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
 
 
@@ -78,16 +69,27 @@ public class NewsActivity extends ActionBarActivity {
                 }
             });
 
+//
+//            if (getIntent().hasExtra("online"))
+//                    loadNews("online");
+//                else
+//                    loadNews("offline");
+//
 
-            if (getIntent().hasExtra("online"))
-                    loadNews("online");
-                else
-                    loadNews("offline");
+            loadNews();
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    News news = ((News.Holder) view.getTag()).news;
+                    new DatabaseHelper(context).makeNewsReaded(news);
+                    Ram.news = news;
+                    startActivity(intent);
+                }
+            });
 
 
-
-            setLvOnItemClickListener();
-            setAutoNewsLoader();
 
 
         } catch (Exception e) {
@@ -96,58 +98,60 @@ public class NewsActivity extends ActionBarActivity {
 
     }
 
-    private void setLvOnItemClickListener() {
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, WebActivity.class);
-                News news = ((News.Holder) view.getTag()).news;
-                markNewsAsReaded(news);
-                Ram.news = news;
-                startActivity(intent);
-            }
-        });
-    }
+//    private void setLvOnItemClickListener() {
+//
+//    }
 
-    private void setAutoNewsLoader() {
-        // auto loader
-        final int endTrigger = 0;
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//    private void setAutoNewsLoader() {
+//        // auto loader
+//        final int endTrigger = 0;
+//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                if (lv.getCount() != 0
+//                        && lv.getLastVisiblePosition() >= (lv.getCount() - 1) - endTrigger) {
+//                    // Do what you need to get more content.
+//                    //loadMore();
+//
+//                    if (loadMore) {
+//                        //Toast.makeText(context, "دریافت ادامه خبرها...", Toast.LENGTH_SHORT).show();
+//                        loadMore = false;
+//                        loadMore();
+//                    }
+//                }
+//            }
+//
+//
+//        });
+//    }
 
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (lv.getCount() != 0
-                        && lv.getLastVisiblePosition() >= (lv.getCount() - 1) - endTrigger) {
-                    // Do what you need to get more content.
-                    //loadMore();
-
-                    if (loadMore) {
-                        //Toast.makeText(context, "دریافت ادامه خبرها...", Toast.LENGTH_SHORT).show();
-                        loadMore = false;
-                        loadMore();
-                    }
-                }
-            }
-
-
-        });
-    }
-
-    private void markNewsAsReaded(News news) {
-        for (News tmp : newses) {
-            if (tmp.uid.equals(news.uid)) {
-                tmp.readed = true;
-            }
-        }
-    }
+//    private void markNewsAsReaded(News news) {
+////        for (News tmp : newses) {
+////            if (tmp.uid.equals(news.uid)) {
+////                tmp.readed = true;
+////            }
+////        }
+//    }
 
     private void refreshContent() {
-        page = 1;
-        loadNews("online");
+        NewsLoader.syncOnline(context, new CallBackFinish() {
+            @Override
+            public void onFinish(String result) {
+                loadNews();
+                hideLoading();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                hideLoading();
+
+            }
+        });
     }
 
     @Override
@@ -180,84 +184,87 @@ public class NewsActivity extends ActionBarActivity {
         }
     }
 
-    public void loadNews(String type) {
-        try {
+//    public void loadNews(String type) {
+//        try {
+//
+//
+//            if (type.equals("offline") && SharedPrefHelper.read(context, group.code.toString()) != null) {
+//
+//                //menu.getItem(0).setIcon(R.drawable.ic_cloud_off_white_24dp);
+//                ArrayList<News> cashedNews = News.getArrayListFromJson(new JSONArray(SharedPrefHelper.read(context, group.code.toString())));
+//                lv.setAdapter(new ListViewObjectAdapter<News>(context, cashedNews));
+//
+//
+//            } else {
+//                //menu.getItem(0).setIcon(R.drawable.ic_cloud_queue_white_24dp);
+//                showLoading();
+//                List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
+//                basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
+//                basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
+//                basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
+//                basicNameValuePairs.add(new BasicNameValuePair("count", 50 + ""));
+//                Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
+//
+//
+//                    @Override
+//                    public void onSuccessFinish(String result) {
+//                        hideLoading();
+//
+//
+//
+//                        if ( result!=null && result.length()<2 ) {
+//                            Toast.makeText(context,"خبری موجود نیست",Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//
+//                        try {
+//                            JSONObject json = new JSONObject(result);
+//                            if (json.getString("haveContinue").equals("yes")) {
+//                                loadMore = true;
+//                                page++;
+//                            }
+//                            newses.clear();
+//                            newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
+//
+//                            // check for last news id
+//                            for(News news : newses){
+//                                int newsUid = Integer.parseInt(news.uid);
+//                                int lastUid = Integer.parseInt(SharedPrefHelper.read(context,"lastNewsUid"));
+//                                if (newsUid>lastUid)
+//                                    SharedPrefHelper.write(context,"lastNewsUid",newsUid+"");
+//                            }
+//
+//                            //SharedPrefHelper.write(context, "lastNewsUid", newses.get(0).uid);
+//                            downloadNewsPages(newses);
+//                            storeNewsesArrayList();
+//                            lv.setAdapter(new ListViewObjectAdapter<News>(context, newses));
+//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                            Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String errorMessage) {
+//                        hideLoading();
+//
+//                    }
+//                });
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
-
-            if (type.equals("offline") && SharedPrefHelper.read(context, group.code.toString()) != null) {
-
-                //menu.getItem(0).setIcon(R.drawable.ic_cloud_off_white_24dp);
-                ArrayList<News> cashedNews = News.getArrayListFromJson(new JSONArray(SharedPrefHelper.read(context, group.code.toString())));
-                lv.setAdapter(new ListViewObjectAdapter<News>(context, cashedNews));
-
-
-            } else {
-                //menu.getItem(0).setIcon(R.drawable.ic_cloud_queue_white_24dp);
-                showLoading();
-                List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-                basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
-                basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
-                basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
-                basicNameValuePairs.add(new BasicNameValuePair("count", 50 + ""));
-                Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-                    @Override
-                    public void onBeforStart() {
-
-                    }
-
-                    @Override
-                    public void onSuccessFinish(String result) {
-                        hideLoading();
-
-
-
-                        if ( result!=null && result.length()<2 ) {
-                            Toast.makeText(context,"خبری موجود نیست",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        try {
-                            JSONObject json = new JSONObject(result);
-                            if (json.getString("haveContinue").equals("yes")) {
-                                loadMore = true;
-                                page++;
-                            }
-                            newses.clear();
-                            newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
-
-                            // check for last news id
-                            for(News news : newses){
-                                int newsUid = Integer.parseInt(news.uid);
-                                int lastUid = Integer.parseInt(SharedPrefHelper.read(context,"lastNewsUid"));
-                                if (newsUid>lastUid)
-                                    SharedPrefHelper.write(context,"lastNewsUid",newsUid+"");
-                            }
-
-                            //SharedPrefHelper.write(context, "lastNewsUid", newses.get(0).uid);
-                            downloadNewsPages(newses);
-                            storeNewsesArrayList();
-                            lv.setAdapter(new ListViewObjectAdapter<News>(context, newses));
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(String errorMessage) {
-                        hideLoading();
-
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+    public void loadNews(){
+        ArrayList<News> loadedFromDb = new DatabaseHelper(context).getAllNews();
+        ArrayList<News> newses = NewsLoader.filterNewsByGroup(context,loadedFromDb,group);
+        lv.setAdapter(new ListViewObjectAdapter<News>(context,newses));
     }
 
     private void storeNewsesArrayList() {
@@ -273,54 +280,50 @@ public class NewsActivity extends ActionBarActivity {
         }
     }
 
-    public void loadMore() {
-
-        footerprogressBar.setVisibility(View.VISIBLE);
-        List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-        basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
-        basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
-        basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
-        basicNameValuePairs.add(new BasicNameValuePair("count", 20 + ""));
-
-        Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
-
-            }
-
-            @Override
-            public void onSuccessFinish(String result) {
-                footerprogressBar.setVisibility(View.GONE);
-
-                try {
-                    JSONObject json = new JSONObject(result);
-                    if (json.getString("haveContinue").equals("yes")) {
-                        loadMore = true;
-                        page++;
-                    }
-                    newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
-                    downloadNewsPages(newses);
-
-                    storeNewsesArrayList();
-
-                    ((ListViewObjectAdapter<News>) lv.getAdapter()).items = newses;
-                    ((ListViewObjectAdapter<News>) lv.getAdapter()).notifyDataSetChanged();
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                footerprogressBar.setVisibility(View.GONE);
-
-            }
-        });
-    }
+//    public void loadMore() {
+//
+//        footerprogressBar.setVisibility(View.VISIBLE);
+//        List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
+//        basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
+//        basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
+//        basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
+//        basicNameValuePairs.add(new BasicNameValuePair("count", 20 + ""));
+//
+//        Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
+//
+//            @Override
+//            public void onSuccessFinish(String result) {
+//                footerprogressBar.setVisibility(View.GONE);
+//
+//                try {
+//                    JSONObject json = new JSONObject(result);
+//                    if (json.getString("haveContinue").equals("yes")) {
+//                        loadMore = true;
+//                        page++;
+//                    }
+//                    newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
+//                    downloadNewsPages(newses);
+//
+//                    storeNewsesArrayList();
+//
+//                    ((ListViewObjectAdapter<News>) lv.getAdapter()).items = newses;
+//                    ((ListViewObjectAdapter<News>) lv.getAdapter()).notifyDataSetChanged();
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(String errorMessage) {
+//                footerprogressBar.setVisibility(View.GONE);
+//
+//            }
+//        });
+//    }
 
     public void showLoading() {
         swipeRefreshLayout.post(new Runnable() {

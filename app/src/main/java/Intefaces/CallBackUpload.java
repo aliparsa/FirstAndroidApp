@@ -6,9 +6,9 @@ package Intefaces;
 
 public interface CallBackUpload<T> {
 
-    public void onSuccess(T result, String tag);
+    void onSuccess(T result, String tag);
 
-    public void onError(String errorMessage);
+    void onError(String errorMessage);
 
 
 }

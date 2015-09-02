@@ -43,7 +43,7 @@ public class CustomVideoView extends VideoView {
         }
     }
 
-    public static interface PlayPauseListener {
+    public interface PlayPauseListener {
         void onPlay();
         void onPause();
     }

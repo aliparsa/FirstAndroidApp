@@ -29,13 +29,11 @@ public class GroupsLoader {
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
         basicNameValuePairs.add(new BasicNameValuePair("tag", "groups"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
-            }
+
 
             @Override
             public void onSuccessFinish(String result) {
-                if (result != null && ((String) result).length() > 1)
+                if (result != null && result.length() > 1)
                     SharedPrefHelper.write(context, "groups", result);
             }
 
@@ -74,10 +72,7 @@ public class GroupsLoader {
         List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
         basicNameValuePairs.add(new BasicNameValuePair("tag", "groups"));
         Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-            @Override
-            public void onBeforStart() {
 
-            }
 
             @Override
             public void onSuccessFinish(String result) {
