@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "irdevelopers.asemanweb"
-        minSdkVersion 17
+        minSdkVersion 11
         targetSdkVersion 21
-        versionCode 14
-        versionName "14"
+        versionCode 15
+        versionName "15"
     }
     buildTypes {
         release {

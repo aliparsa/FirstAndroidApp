@@ -73,8 +73,8 @@ public class NotificationService extends Service {
 
 
 // Creates an explicit intent for an Activity in your app
-            Intent resultIntent = new Intent(this, NewsGroupPickerActivity.class);
-            resultIntent.putExtra("online", true);
+            Intent resultIntent = new Intent(this, AllNewsActivity.class);
+          //  resultIntent.putExtra("online", true);
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.

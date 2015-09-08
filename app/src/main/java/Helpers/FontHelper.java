@@ -21,6 +21,11 @@ import java.util.Set;
  */
 public class FontHelper {
 
+    private static Context context;
+    private static Typeface tfBKOODB;
+    private static Typeface tfBKAMRAN;
+    private static Typeface tfYekan;
+
 
     public static void SetFontNormal(Context context, Fonts font, TextView view) {
 
@@ -33,7 +38,6 @@ public class FontHelper {
         SetFont(context, font, view, Typeface.NORMAL);
 
     }
-
 
 
     public static void SetFontBold(Context context, Fonts font, TextView view) {
@@ -59,20 +63,19 @@ public class FontHelper {
 
         switch (font) {
             case MAIN_FONT:
-                tf = Typeface.createFromAsset(context.getAssets(), "fonts/BKOODB.TTF");
-                view.setTypeface(tf, typeFace);
+                if (tfBKOODB == null)
+                    tfBKOODB = Typeface.createFromAsset(context.getAssets(), "fonts/BKOODB.TTF");
+                view.setTypeface(tfBKOODB, typeFace);
                 break;
             case BKAMRAN:
-                tf = Typeface.createFromAsset(context.getAssets(), "fonts/BKAMRAN.TTF");
-                view.setTypeface(tf, typeFace);
-                break;
-            case BKOODAK:
-                tf = Typeface.createFromAsset(context.getAssets(), "fonts/BKOODB.TTF");
-                view.setTypeface(tf, typeFace);
+                if (tfBKAMRAN == null)
+                    tfBKAMRAN = Typeface.createFromAsset(context.getAssets(), "fonts/BKAMRAN.TTF");
+                view.setTypeface(tfBKAMRAN, typeFace);
                 break;
             case YEKAN:
-                tf = Typeface.createFromAsset(context.getAssets(), "fonts/Yekan.ttf");
-                view.setTypeface(tf, typeFace);
+                if (tfYekan == null)
+                    tfYekan = Typeface.createFromAsset(context.getAssets(), "fonts/Yekan.ttf");
+                view.setTypeface(tfYekan, typeFace);
                 break;
 
         }

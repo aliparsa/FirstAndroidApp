@@ -2,6 +2,7 @@ package DataModel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -131,6 +132,10 @@ public class News implements IListViewItem, Serializable {
 
         holder.title.setText(this.title);
 
+        // fade if news readed already
+        if (this.readed!=null && this.readed.equals("yes"))
+            holder.title.setTextColor(Color.parseColor("#8c8c8c"));
+
         if (image !=null && image.length()>1) {
             // load from address
 
@@ -158,7 +163,7 @@ public class News implements IListViewItem, Serializable {
 
     public class Holder {
         public News news;
-        TextView title;
+        public TextView title;
         ImageView imageView;
     }
 }

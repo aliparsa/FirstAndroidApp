@@ -9,7 +9,6 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:layout_alignParentTop="true"
-        android:background="#fdfcff"
         android:layout_alignParentStart="true" />
 
     <Views.TextViewFont
@@ -22,7 +21,7 @@
         android:paddingRight="10dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:textColor="#ff585858"
+        android:textColor="#3a3a3a"
         android:id="@+id/title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

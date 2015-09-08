@@ -25,29 +25,6 @@ public class NewsLoader {
 
     public static final String MAX_UID = "MAX_UID";
 
-    public static ArrayList<News> newses = new ArrayList<News>();
-
-    public static ArrayList<News> getNews(Context context, Group group) {
-        try {
-            if (SharedPrefHelper.contain(context, group.code.toString())) {
-                ArrayList<News> news = News.getArrayListFromJson(new JSONArray(SharedPrefHelper.read(context, group.code.toString())));
-                if (news.size() > 0)
-                    return news;
-                else
-                    return null;
-
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-
-
     public static Integer getMaxUid(Context context) {
         if (SharedPrefHelper.contain(context,MAX_UID))
                 return Integer.parseInt(SharedPrefHelper.read(context,MAX_UID));
@@ -59,7 +36,6 @@ public class NewsLoader {
 
         SharedPrefHelper.write(context, MAX_UID, uid + "");
     }
-
 
     public static void syncSilent(final Context context) {
         try {
@@ -86,6 +62,8 @@ public class NewsLoader {
                             // save max uid
                             setMaxUid(context, new DatabaseHelper(context).getLastNews().uid);
 
+                            //download news pages
+                            downloadNewsPages(context,newses);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -128,6 +106,9 @@ public class NewsLoader {
                             // save max uid
                             setMaxUid(context, new DatabaseHelper(context).getLastNews().uid);
 
+                            //download news pages
+                            downloadNewsPages(context,newses);
+
                             callBackFinish.onFinish("");
 
                         } catch (JSONException e) {
@@ -150,32 +131,34 @@ public class NewsLoader {
         }
     }
 
-
-    private static void addToLocalNews(Context context, Group group, ArrayList<News> newNews) {
-        ArrayList<News> oldNews = getNews(context, group);
-        for (News news : newNews) {
-            if (!oldNews.contains(news)) {
-                oldNews.add(news);
-            }
-        }
-
-        String str = News.getJsonFromArrayList(oldNews);
-        SharedPrefHelper.write(context, group.code.toString(), str);
-    }
-
-    private static void downloadNewsPages(Context context, ArrayList<News> newses) {
-        for (News news : newses) {
+    private static void downloadNewsPages(final Context context, ArrayList<News> newses) {
+        for (final News news : newses) {
             File file = new File(PathHelper.homePath + "/" + news.uid + ".html");
             if (!file.exists())
                 new DownloadTaskHidden(context).execute(news.url, PathHelper.homePath + "/" + news.uid + ".html");
+//
+//            new PageSourceDownloaderTask(context, news.url, new CallBackFinish() {
+//                    @Override
+//                    public void onFinish(String result) {
+//                        new DatabaseHelper(context).saveContentOfNews(news,result);
+//                    }
+//
+//                    @Override
+//                    public void onError(String errorMessage) {
+//
+//                    }
+//                });
         }
     }
 
     public static  ArrayList<News> filterNewsByGroup(Context context, ArrayList<News> unfilteredNewses,Group group){
         ArrayList<DataModel.News> newses = new ArrayList<DataModel.News>();
         for(DataModel.News news : unfilteredNewses){
-            if(news.groupCode.endsWith(group.code)){
-                newses.add(news);
+            String [] groupCodes = news.groupCode.split(",");
+            for( String code :groupCodes){
+                if(code.equals(group.code)){
+                    newses.add(news);
+                }
             }
         }
         return newses;

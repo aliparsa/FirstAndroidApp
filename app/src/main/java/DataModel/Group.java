@@ -2,6 +2,7 @@ package DataModel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class Group implements IListViewItem, Serializable {
     public String code;
     public String image;
     Bitmap bitmap;
+    public Boolean unreadInside;
 
     public Group(String title, String code, String image) {
         this.title = title;
@@ -92,6 +94,18 @@ public class Group implements IListViewItem, Serializable {
             }
         }
         holder.title.setText(this.title);
+
+        if(this.unreadInside!= null && this.unreadInside==true)
+        {
+        // hilight
+            holder.title.setTextColor(Color.parseColor("#000000"));
+
+
+        }else{
+            // fade
+            holder.title.setTextColor(Color.parseColor("#8c8c8c"));
+
+        }
 
 
         if (image !=null && image.length()>1) {

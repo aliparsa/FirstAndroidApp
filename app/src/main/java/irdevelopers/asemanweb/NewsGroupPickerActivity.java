@@ -5,14 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -23,19 +28,26 @@ import java.util.List;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
+import DataModel.News;
+import Helpers.DatabaseHelper;
 import Helpers.GroupsLoader;
 import Helpers.Ram;
 import Helpers.SharedPrefHelper;
 import Intefaces.CallBackAsync;
 import Intefaces.CallBackGroup;
 import Utilities.Webservice;
+import Views.TextViewFont;
 
 
 public class NewsGroupPickerActivity extends ActionBarActivity {
     Context context;
     ProgressBar pg;
     ListView newslv;
+
+    ListViewObjectAdapter<Group> adapter;
+
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RelativeLayout header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +67,21 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
                 GroupsLoader.syncOnline(context, new CallBackGroup() {
                     @Override
                     public void onSuccess(ArrayList<Group> groups) {
-                        newslv.setAdapter(new ListViewObjectAdapter<Group>(context, groups));
+
+                        ArrayList<News> newses = new DatabaseHelper(context).getAllUnReadNews();
+                        for (Group group : groups) {
+                            for (News news : newses) {
+                                String[] groupCodes = news.groupCode.split(",");
+                                for (String code : groupCodes) {
+                                    if (group.code.equals(code)) {
+                                        group.unreadInside = true;
+                                    }
+                                }
+                            }
+                        }
+                        adapter = new ListViewObjectAdapter<Group>(context, groups);
+                        newslv.setAdapter(adapter);
+
                         hideLoading();
                     }
 
@@ -72,7 +98,22 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         GroupsLoader.getGroups(context, new CallBackGroup() {
             @Override
             public void onSuccess(ArrayList<Group> groups) {
-                newslv.setAdapter(new ListViewObjectAdapter<Group>(context, groups));
+
+                ArrayList<News> newses = new DatabaseHelper(context).getAllUnReadNews();
+                for (Group group : groups) {
+                    for (News news : newses) {
+                        String[] groupCodes = news.groupCode.split(",");
+
+                        for (String code : groupCodes) {
+                            if (group.code.equals(code)) {
+                                group.unreadInside = true;
+                            }
+                        }
+                    }
+                }
+
+                adapter=new ListViewObjectAdapter<Group>(context, groups);
+                newslv.setAdapter(adapter);
             }
 
             @Override
@@ -82,11 +123,27 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         });
 
 
+        // set view all news item to listview header
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        header = (RelativeLayout) inflater.inflate(R.layout.item_group, null);
+        TextViewFont textViewFont = (TextViewFont) header.findViewById(R.id.title);
+        textViewFont.setText("همه اخبار");
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(context,AllNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        newslv.addHeaderView(header);
+
+
         newslv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Group group = ((Group.Holder) view.getTag()).group;
-                if (Ram.updatedGroups != null) Ram.updatedGroups.remove(group.code);
+                //if (Ram.updatedGroups != null) Ram.updatedGroups.remove(group.code);
                 Intent intent = new Intent(context, NewsActivity.class);
                 if (getIntent().hasExtra("online")) {
                     intent.putExtra("online", true);
@@ -95,8 +152,17 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import DataModel.Group;
 import DataModel.News;
 
 /**
@@ -69,7 +70,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + NEWS_KEY_IMAGE + " TEXT,"
                         + NEWS_GROUP_CODE + " TEXT,"
                         + NEWS_KEY_READED + " TEXT,"
-                        + NEWS_KEY_NOTIFIED + " TEXT"
+                        + NEWS_KEY_NOTIFIED + " TEXT,"
+                        + "UNIQUE("+NEWS_KEY_UID+")"
                         + ")";
         db.execSQL(CREATE_PERSONNEL_TABLE);
 
@@ -102,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<News> getAllNews() {
         SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NEWS, null);
+        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NEWS + " ORDER BY " + NEWS_KEY_UID + " DESC", null);
         ArrayList<News> newses = new ArrayList<News>();
 
 
@@ -129,6 +131,66 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return newses;
     }
+
+    public ArrayList<News> getAllNewsOfGroup(Group group) {
+        SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NEWS + " WHERE " + NEWS_GROUP_CODE+" ='"+group.code+"' ", null);
+        ArrayList<News> newses = new ArrayList<News>();
+
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+
+                do {
+                    News  news = new News();
+                    news.uid=""+(cursor.getInt(cursor.getColumnIndex(NEWS_KEY_UID)));
+                    news.title=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_TITLE)));
+                    news.content=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_CONTENT)));
+                    news.url=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_URL)));
+                    news.image=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_IMAGE))));
+                    news.groupCode=(cursor.getString(cursor.getColumnIndex(NEWS_GROUP_CODE)));
+                    news.readed=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_READED))));
+                    news.nofified=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_NOTIFIED))));
+
+
+                    newses.add(news);
+
+                } while (cursor.moveToNext());
+
+            }
+        }
+        return newses;
+    }
+
+//    public ArrayList<News> getAllUnreadNewsOfGroup(Group group) {
+//        SQLiteDatabase db = getReadableDatabase();
+//        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NEWS + " WHERE " + NEWS_GROUP_CODE+" ='"+group.code+"' AND "+NEWS_KEY_READED + " ='no' ", null);
+//        ArrayList<News> newses = new ArrayList<News>();
+//
+//
+//        if (cursor != null) {
+//            if (cursor.moveToFirst()) {
+//
+//                do {
+//                    News  news = new News();
+//                    news.uid=""+(cursor.getInt(cursor.getColumnIndex(NEWS_KEY_UID)));
+//                    news.title=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_TITLE)));
+//                    news.content=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_CONTENT)));
+//                    news.url=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_URL)));
+//                    news.image=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_IMAGE))));
+//                    news.groupCode=(cursor.getString(cursor.getColumnIndex(NEWS_GROUP_CODE)));
+//                    news.readed=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_READED))));
+//                    news.nofified=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_NOTIFIED))));
+//
+//
+//                    newses.add(news);
+//
+//                } while (cursor.moveToNext());
+//
+//            }
+//        }
+//        return newses;
+//    }
 
     public ArrayList<News> getAllUnNotifiedNews() {
         SQLiteDatabase db = getReadableDatabase();
@@ -181,6 +243,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return news;
     }
 
+
+
     public void emptyNewsTable() {
         getReadableDatabase().execSQL("Delete from " + TABLE_NEWS);
     }
@@ -201,4 +265,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getReadableDatabase().execSQL(" UPDATE "+TABLE_NEWS+ " SET " + NEWS_KEY_READED +"='yes'  WHERE "+NEWS_KEY_UID+"="+news.uid);
     }
 
+
+    public ArrayList<News> getAllUnReadNews() {
+        SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NEWS + " WHERE "+NEWS_KEY_READED+" ='no'", null);
+        ArrayList<News> newses = new ArrayList<News>();
+
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+
+                do {
+                    News  news = new News();
+                    news.uid=""+(cursor.getInt(cursor.getColumnIndex(NEWS_KEY_UID)));
+                    news.title=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_TITLE)));
+                    news.content=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_CONTENT)));
+                    news.url=(cursor.getString(cursor.getColumnIndex(NEWS_KEY_URL)));
+                    news.image=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_IMAGE))));
+                    news.groupCode=(cursor.getString(cursor.getColumnIndex(NEWS_GROUP_CODE)));
+                    news.readed=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_READED))));
+                    news.nofified=((cursor.getString(cursor.getColumnIndex(NEWS_KEY_NOTIFIED))));
+
+
+                    newses.add(news);
+
+                } while (cursor.moveToNext());
+
+            }
+        }
+        return newses;
+    }
+
+    public void saveContentOfNews(News news,String content) {
+        getReadableDatabase().execSQL(" UPDATE "+TABLE_NEWS+ " SET " + NEWS_KEY_CONTENT +"='"+content+"'  WHERE "+NEWS_KEY_UID+"="+news.uid);
+
+    }
 }

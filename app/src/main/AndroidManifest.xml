@@ -15,8 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:label="@string/MainActivity"
+             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             android:name=".QuestionsActivity"
             android:label="@string/title_activity_simple_content_viewer"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait" >
+            >
         </activity>
         <activity
             android:name=".RigesterActivity"
@@ -51,19 +51,18 @@
             android:name=".WebActivity"
             android:label="@string/title_activity_web"
             android:parentActivityName=".NewsActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
         <service android:name=".CheckForUpdateService" />
-
-        <service android:name=".NotificationService"
+        <service
+            android:name=".NotificationService"
             android:enabled="true"
-            android:exported="true"/>
-
-        <service android:name=".WatchDogNotification"
+            android:exported="true" />
+        <service
+            android:name=".WatchDogNotification"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
         <service
             android:name=".WatchDogService"
             android:enabled="true"
@@ -74,7 +73,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="irdevelopers.asemanweb.MainActivity" />
@@ -83,14 +82,21 @@
             android:name=".TamasBaMaActivity"
             android:label="@string/title_activity_tamas_ba_ma"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainPagesWebActivity"
             android:label="@string/title_activity_main_pages_web"
             android:parentActivityName=".MainActivity"
-
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AllNewsActivity"
+            android:label="@string/title_activity_all_news"
+            android:parentActivityName=".NewsGroupPickerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="irdevelopers.asemanweb.NewsGroupPickerActivity" />
+        </activity>
     </application>
 
 </manifest>

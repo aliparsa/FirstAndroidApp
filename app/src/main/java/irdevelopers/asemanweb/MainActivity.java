@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableRow;
 import android.widget.ViewFlipper;
 
@@ -26,8 +27,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
+import DataModel.News;
 import Helpers.AppUpdaterHelper;
+import Helpers.DatabaseHelper;
 import Helpers.DownloadTaskHidden;
 import Helpers.GroupsLoader;
 import Helpers.NewsLoader;
@@ -58,6 +62,8 @@ public class MainActivity extends ActionBarActivity {
     private LinearLayout tamasBaMa;
     private LinearLayout narmafzarha;
     private LinearLayout sabtNam;
+
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +134,8 @@ public class MainActivity extends ActionBarActivity {
         downloadMainPages();
 
         copyAssets();
+
+        ArrayList<News> newses = new DatabaseHelper(context).getAllNews();
 
 
         // flipviewer
@@ -279,9 +287,10 @@ public class MainActivity extends ActionBarActivity {
 
         AppUpdaterHelper.checkForUpdate(context);
 
-        SliderHelper.loadSlide1(context, slide1);
-        SliderHelper.loadSlide2(context, slide2);
-        SliderHelper.loadSlide3(context, slide3);
+        progressBar = (ProgressBar) findViewById(R.id.slider_progress);
+        SliderHelper.loadSlide1(context, slide1,progressBar);
+        SliderHelper.loadSlide2(context, slide2,progressBar);
+        SliderHelper.loadSlide3(context, slide3,progressBar);
 
 
     }
@@ -436,9 +445,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void reloadMainPage() {
-        SliderHelper.loadSlide1(context, slide1);
-        SliderHelper.loadSlide2(context, slide2);
-        SliderHelper.loadSlide3(context, slide3);
+        SliderHelper.loadSlide1(context, slide1,progressBar);
+        SliderHelper.loadSlide2(context, slide2,progressBar);
+        SliderHelper.loadSlide3(context, slide3,progressBar);
         downloadMainPages();
         hideLoading();
     }

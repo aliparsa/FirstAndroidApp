@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TableRow;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,20 +32,24 @@ public class SliderHelper {
 
 
 
-    public static void loadSlide1(Context context, final ImageView imageView){
+    public static void loadSlide1(Context context, final ImageView imageView, final ProgressBar progressBar){
 
 
         if (Ram.slide1 != null) {
             // if exist in Ram load from ram
             imageView.setImageBitmap(Ram.slide1);
+            progressBar.setVisibility(View.GONE);
 
         }else{
             // if exist in Disk load from disk
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bitmap = BitmapFactory.decodeFile(slide1Path, options);
-            Ram.slide1 = bitmap;
-            imageView.setImageBitmap(bitmap);
+            if(bitmap!=null) {
+                Ram.slide1 = bitmap;
+                imageView.setImageBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
+            }
         }
 
         // call online load anyway
@@ -59,6 +64,8 @@ public class SliderHelper {
 
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -66,6 +73,8 @@ public class SliderHelper {
                 imageView.setImageBitmap(bitmap);
                 Ram.slide1 = bitmap;
                 saveBitmap(bitmap,slide1Path);
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -75,18 +84,24 @@ public class SliderHelper {
         });
     }
 
-    public static void loadSlide2(Context context, final ImageView imageView){
+    public static void loadSlide2(Context context, final ImageView imageView, final ProgressBar progressBar){
 
         if (Ram.slide2 != null) {
             // if exist in Ram load from ram
             imageView.setImageBitmap(Ram.slide2);
+            progressBar.setVisibility(View.GONE);
+
         }else{
             // if exist in Disk load from disk
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bitmap = BitmapFactory.decodeFile(slide2Path, options);
-            Ram.slide2 = bitmap;
-            imageView.setImageBitmap(bitmap);
+            if(bitmap!=null) {
+
+                Ram.slide2 = bitmap;
+                imageView.setImageBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
+            }
         }
 
         // call online load anyway
@@ -101,6 +116,8 @@ public class SliderHelper {
 
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -108,6 +125,8 @@ public class SliderHelper {
                 imageView.setImageBitmap(bitmap);
                 Ram.slide2 = bitmap;
                 saveBitmap(bitmap,slide2Path);
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -117,18 +136,24 @@ public class SliderHelper {
         });
     }
 
-    public static void loadSlide3(Context context, final ImageView imageView){
+    public static void loadSlide3(Context context, final ImageView imageView, final ProgressBar progressBar){
 
         if (Ram.slide3 != null) {
             // if exist in Ram load from ram
             imageView.setImageBitmap(Ram.slide3);
+            progressBar.setVisibility(View.GONE);
+
         }else{
             // if exist in Disk load from disk
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bitmap = BitmapFactory.decodeFile(slide3Path, options);
-            Ram.slide3 = bitmap;
-            imageView.setImageBitmap(bitmap);
+            if(bitmap!=null) {
+
+                Ram.slide3 = bitmap;
+                imageView.setImageBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
+            }
         }
 
         // call online load anyway
@@ -143,6 +168,8 @@ public class SliderHelper {
 
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -150,6 +177,8 @@ public class SliderHelper {
                 imageView.setImageBitmap(bitmap);
                 Ram.slide3 = bitmap;
                 saveBitmap(bitmap,slide3Path);
+                progressBar.setVisibility(View.GONE);
+
             }
 
             @Override

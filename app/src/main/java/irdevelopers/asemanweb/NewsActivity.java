@@ -3,6 +3,7 @@ package irdevelopers.asemanweb;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,6 +42,8 @@ public class NewsActivity extends ActionBarActivity {
     ProgressBar footerprogressBar;
     Bundle bundle;
     private Menu menu;
+
+    ListViewObjectAdapter<News> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,7 @@ public class NewsActivity extends ActionBarActivity {
                 }
             });
 
-//
-//            if (getIntent().hasExtra("online"))
-//                    loadNews("online");
-//                else
-//                    loadNews("offline");
-//
+
 
             loadNews();
 
@@ -83,7 +82,9 @@ public class NewsActivity extends ActionBarActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(context, WebActivity.class);
                     News news = ((News.Holder) view.getTag()).news;
+                    ((News.Holder) view.getTag()).title.setTextColor(Color.parseColor("#8c8c8c"));
                     new DatabaseHelper(context).makeNewsReaded(news);
+
                     Ram.news = news;
                     startActivity(intent);
                 }
@@ -98,45 +99,9 @@ public class NewsActivity extends ActionBarActivity {
 
     }
 
-//    private void setLvOnItemClickListener() {
-//
-//    }
 
-//    private void setAutoNewsLoader() {
-//        // auto loader
-//        final int endTrigger = 0;
-//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if (lv.getCount() != 0
-//                        && lv.getLastVisiblePosition() >= (lv.getCount() - 1) - endTrigger) {
-//                    // Do what you need to get more content.
-//                    //loadMore();
-//
-//                    if (loadMore) {
-//                        //Toast.makeText(context, "دریافت ادامه خبرها...", Toast.LENGTH_SHORT).show();
-//                        loadMore = false;
-//                        loadMore();
-//                    }
-//                }
-//            }
-//
-//
-//        });
-//    }
 
-//    private void markNewsAsReaded(News news) {
-////        for (News tmp : newses) {
-////            if (tmp.uid.equals(news.uid)) {
-////                tmp.readed = true;
-////            }
-////        }
-//    }
+
 
     private void refreshContent() {
         NewsLoader.syncOnline(context, new CallBackFinish() {
@@ -184,146 +149,26 @@ public class NewsActivity extends ActionBarActivity {
         }
     }
 
-//    public void loadNews(String type) {
-//        try {
-//
-//
-//            if (type.equals("offline") && SharedPrefHelper.read(context, group.code.toString()) != null) {
-//
-//                //menu.getItem(0).setIcon(R.drawable.ic_cloud_off_white_24dp);
-//                ArrayList<News> cashedNews = News.getArrayListFromJson(new JSONArray(SharedPrefHelper.read(context, group.code.toString())));
-//                lv.setAdapter(new ListViewObjectAdapter<News>(context, cashedNews));
-//
-//
-//            } else {
-//                //menu.getItem(0).setIcon(R.drawable.ic_cloud_queue_white_24dp);
-//                showLoading();
-//                List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-//                basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
-//                basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
-//                basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
-//                basicNameValuePairs.add(new BasicNameValuePair("count", 50 + ""));
-//                Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-//
-//
-//                    @Override
-//                    public void onSuccessFinish(String result) {
-//                        hideLoading();
-//
-//
-//
-//                        if ( result!=null && result.length()<2 ) {
-//                            Toast.makeText(context,"خبری موجود نیست",Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//
-//                        try {
-//                            JSONObject json = new JSONObject(result);
-//                            if (json.getString("haveContinue").equals("yes")) {
-//                                loadMore = true;
-//                                page++;
-//                            }
-//                            newses.clear();
-//                            newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
-//
-//                            // check for last news id
-//                            for(News news : newses){
-//                                int newsUid = Integer.parseInt(news.uid);
-//                                int lastUid = Integer.parseInt(SharedPrefHelper.read(context,"lastNewsUid"));
-//                                if (newsUid>lastUid)
-//                                    SharedPrefHelper.write(context,"lastNewsUid",newsUid+"");
-//                            }
-//
-//                            //SharedPrefHelper.write(context, "lastNewsUid", newses.get(0).uid);
-//                            downloadNewsPages(newses);
-//                            storeNewsesArrayList();
-//                            lv.setAdapter(new ListViewObjectAdapter<News>(context, newses));
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String errorMessage) {
-//                        hideLoading();
-//
-//                    }
-//                });
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+
 
     public void loadNews(){
         ArrayList<News> loadedFromDb = new DatabaseHelper(context).getAllNews();
-        ArrayList<News> newses = NewsLoader.filterNewsByGroup(context,loadedFromDb,group);
-        lv.setAdapter(new ListViewObjectAdapter<News>(context,newses));
-    }
-
-    private void storeNewsesArrayList() {
-        String str = News.getJsonFromArrayList(newses);
-        SharedPrefHelper.write(context, group.code.toString(), str);
-    }
-
-    private void downloadNewsPages(ArrayList<News> newses) {
-        for (News news : newses) {
-            File file = new File(PathHelper.homePath + "/" + news.uid + ".html");
-            if (!file.exists())
-                new DownloadTaskHidden(context).execute(news.url, PathHelper.homePath + "/" + news.uid + ".html");
+        ArrayList<News> newses = NewsLoader.filterNewsByGroup(context, loadedFromDb, group);
+        if(newses.size()<1)
+        {
+            Toast.makeText(context,"خبری در این بخش موجود نیست",Toast.LENGTH_LONG).show();
         }
+        adapter = new ListViewObjectAdapter<News>(context,newses);
+        lv.setAdapter(adapter);
     }
 
-//    public void loadMore() {
-//
-//        footerprogressBar.setVisibility(View.VISIBLE);
-//        List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-//        basicNameValuePairs.add(new BasicNameValuePair("tag", "news"));
-//        basicNameValuePairs.add(new BasicNameValuePair("groupCode", group.code.toString()));
-//        basicNameValuePairs.add(new BasicNameValuePair("page", page + ""));
-//        basicNameValuePairs.add(new BasicNameValuePair("count", 20 + ""));
-//
-//        Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-//
-//            @Override
-//            public void onSuccessFinish(String result) {
-//                footerprogressBar.setVisibility(View.GONE);
-//
-//                try {
-//                    JSONObject json = new JSONObject(result);
-//                    if (json.getString("haveContinue").equals("yes")) {
-//                        loadMore = true;
-//                        page++;
-//                    }
-//                    newses.addAll(News.getArrayListFromJson(json.getJSONArray("content")));
-//                    downloadNewsPages(newses);
-//
-//                    storeNewsesArrayList();
-//
-//                    ((ListViewObjectAdapter<News>) lv.getAdapter()).items = newses;
-//                    ((ListViewObjectAdapter<News>) lv.getAdapter()).notifyDataSetChanged();
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(context, "server responce not valid !", Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(String errorMessage) {
-//                footerprogressBar.setVisibility(View.GONE);
-//
-//            }
-//        });
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        if(adapter!=null){
+//            adapter.notifyDataSetChanged();
+//        }
+    }
 
     public void showLoading() {
         swipeRefreshLayout.post(new Runnable() {
