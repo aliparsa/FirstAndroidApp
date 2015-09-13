@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="irdevelopers.asemanweb.WebActivity">
 
-    <item android:id="@+id/action_settings" android:title="بروزرسانی"
+    <item android:id="@+id/action_settings"  android:icon="@drawable/refresh" android:title="بروزرسانی"
         android:orderInCategory="100" app:showAsAction="always" />
 
 

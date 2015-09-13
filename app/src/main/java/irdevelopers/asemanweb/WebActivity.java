@@ -11,6 +11,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import DataModel.News;
 import Helpers.DownloadTaskHidden;
 import Helpers.PathHelper;
 import Helpers.Ram;
+import Helpers.ShareHelper;
 
 
 public class WebActivity extends ActionBarActivity {
@@ -29,6 +31,7 @@ public class WebActivity extends ActionBarActivity {
     ProgressBar progressBar;
     String mode;
     News news;
+    ImageView sharebutton;
     private Context context;
 
     @Override
@@ -41,7 +44,7 @@ public class WebActivity extends ActionBarActivity {
         forceRTLIfSupported();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar3);
-
+        sharebutton = (ImageView) findViewById(R.id.imageViewShare);
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -61,14 +64,22 @@ public class WebActivity extends ActionBarActivity {
             onlinePath = news.url;
             offlinePath = PathHelper.homePath + "/" + news.uid + ".html";
             mode = "news";
+            sharebutton.setVisibility(View.VISIBLE);
 
         } else {
+            sharebutton.setVisibility(View.GONE);
             onlinePath = getIntent().getStringExtra("onlinePath");
             offlinePath = getIntent().getStringExtra("offlinePath");
             mode = "page";
         }
 
 
+        sharebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareHelper.share(context,news);
+            }
+        });
         loadPage();
 
 

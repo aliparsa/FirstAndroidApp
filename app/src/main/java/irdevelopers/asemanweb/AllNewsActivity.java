@@ -1,7 +1,9 @@
 package irdevelopers.asemanweb;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +23,7 @@ import DataModel.News;
 import Helpers.DatabaseHelper;
 import Helpers.NewsLoader;
 import Helpers.Ram;
+import Helpers.ShareHelper;
 import Intefaces.CallBackFinish;
 
 public class AllNewsActivity extends ActionBarActivity {
@@ -50,6 +53,25 @@ public class AllNewsActivity extends ActionBarActivity {
 
                 Ram.news = news;
                 startActivity(intent);
+            }
+        });
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                String[] name = new String[]{"اشتراک گذاری"};
+                builder.setItems(name, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        News news = ((News.Holder) view.getTag()).news;
+                        ShareHelper.share(context, news);
+
+                    }
+                });
+                builder.show();
+
+                return true;
             }
         });
 
