@@ -59,16 +59,18 @@ public class AllNewsActivity extends ActionBarActivity {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+                final News news = ((News.Holder) view.getTag()).news;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                String[] name = new String[]{"اشتراک گذاری"};
-                builder.setItems(name, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        News news = ((News.Holder) view.getTag()).news;
-                        ShareHelper.share(context, news);
+                String[] name = new String[1];
+                name[0] = "اشتراک گذاری";
 
-                    }
-                });
+                builder.setItems(name, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ShareHelper.share(context, news);
+
+                        }
+                    });
                 builder.show();
 
                 return true;
