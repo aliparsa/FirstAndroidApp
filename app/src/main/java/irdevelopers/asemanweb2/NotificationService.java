@@ -1,4 +1,4 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 import DataModel.News;
 import Helpers.DatabaseHelper;
-import irdevelopers.asemanweb.NewsGroupPickerActivity;
-import irdevelopers.asemanweb.R;
 
 public class NotificationService extends Service {
     public NotificationService() {

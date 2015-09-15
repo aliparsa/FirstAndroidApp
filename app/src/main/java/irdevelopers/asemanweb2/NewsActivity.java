@@ -1,4 +1,4 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -18,19 +18,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
 import DataModel.News;
 import Helpers.DatabaseHelper;
-import Helpers.DownloadTaskHidden;
 import Helpers.NewsLoader;
-import Helpers.PathHelper;
 import Helpers.Ram;
 import Helpers.ShareHelper;
-import Helpers.SharedPrefHelper;
 import Intefaces.CallBackFinish;
 
 

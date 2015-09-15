@@ -24,7 +24,7 @@ import Intefaces.CallBackAsync;
 import Intefaces.CallBackDownload;
 import Intefaces.CallBackYes;
 import Utilities.Webservice;
-import irdevelopers.asemanweb.R;
+import irdevelopers.asemanweb2.R;
 
 /**
  * Created by Alip on 8/16/2015.
@@ -55,11 +55,10 @@ public class AppUpdaterHelper
                 if (serverVersion > versionCode) {
                     // show update dialog
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View headerView = inflater.inflate(R.layout.item_update_dialog_title, null);
+                    View view = inflater.inflate(R.layout.item_update_dialog_title, null);
 
                     new AlertDialog.Builder(context)
-                            .setCustomTitle(headerView)
-                            .setMessage("نسخه جدیدی از برنامه موجود است آیا بروزرسانی مینمایید؟")
+                            .setView(view)
                             .setPositiveButton("دانلود و نصب", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

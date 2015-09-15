@@ -1,6 +1,5 @@
 package Helpers;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -19,8 +18,8 @@ import java.util.List;
 
 import Intefaces.CallBackAsync;
 import Utilities.Webservice;
-import irdevelopers.asemanweb.MainActivity;
-import irdevelopers.asemanweb.R;
+import irdevelopers.asemanweb2.MainActivity;
+import irdevelopers.asemanweb2.R;
 
 /**
  * Created by Alip on 8/16/2015.

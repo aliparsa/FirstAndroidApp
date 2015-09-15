@@ -1,4 +1,4 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -31,9 +31,6 @@ import Helpers.SoalLoader;
 import Intefaces.CallBackAsync;
 import Intefaces.CallBackYes;
 import Utilities.Webservice;
-import irdevelopers.asemanweb.MainActivity;
-import irdevelopers.asemanweb.NewsGroupPickerActivity;
-import irdevelopers.asemanweb.R;
 
 public class CheckForUpdateService extends Service {
     public CheckForUpdateService() {

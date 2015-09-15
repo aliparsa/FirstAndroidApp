@@ -17,7 +17,7 @@ public class ShareHelper {
         shareBody+="\n\n";
         shareBody+="خبر خوان آسمان وب را دانلود نمایید";
         shareBody+="\n\n";
-        shareBody+="http://www.myhost.ir/asemanweb.apk";
+        shareBody+="http://skydemo.ir/software.apk";
 
 
         Intent sendIntent = new Intent();

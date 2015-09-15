@@ -19,7 +19,7 @@ import Helpers.Ram;
 import Intefaces.CallBackAsync;
 import Intefaces.IListViewItem;
 import Utilities.DownloadImageTask;
-import irdevelopers.asemanweb.R;
+import irdevelopers.asemanweb2.R;
 
 /**
  * Created by Alip on 7/28/2015.

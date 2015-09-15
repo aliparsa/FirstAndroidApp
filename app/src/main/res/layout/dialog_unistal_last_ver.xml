@@ -6,7 +6,7 @@
     <Views.TextViewFont
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="بروزرسانی"
+        android:text="توجه"
         android:layout_gravity="center"
         android:textColor="#fff"
         android:gravity="center"
@@ -17,7 +17,7 @@
     <Views.TextViewFont
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="نسخه جدیدی از برنامه موجود است. آیا بروزرسانی مینمایید ؟"
+        android:text="لازم است نسخه قبلی برنامه را حذف نمایید. آیا انجام شود ؟"
         android:layout_gravity="center"
         android:gravity="right"
         android:layout_margin="10dp"

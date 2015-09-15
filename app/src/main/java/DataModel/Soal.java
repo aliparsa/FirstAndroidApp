@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import Intefaces.IListViewItem;
-import irdevelopers.asemanweb.R;
+import irdevelopers.asemanweb2.R;
 
 /**
  * Created by Alip on 7/26/2015.

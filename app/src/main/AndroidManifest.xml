@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="irdevelopers.asemanweb" >
+    package="irdevelopers.asemanweb2" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -14,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="irdevelopers.asemanweb2.MainActivity"
             android:label="@string/MainActivity"
              >
             <intent-filter>
@@ -24,78 +23,78 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuestionsActivity"
+            android:name="irdevelopers.asemanweb2.QuestionsActivity"
             android:label="@string/title_activity_simple_content_viewer"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             >
         </activity>
         <activity
-            android:name=".RigesterActivity"
+            android:name="irdevelopers.asemanweb2.RigesterActivity"
             android:label="@string/title_activity_rigester"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".NewsActivity"
+            android:name="irdevelopers.asemanweb2.NewsActivity"
             android:label="@string/title_activity_news"
-            android:parentActivityName=".NewsGroupPickerActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.NewsGroupPickerActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".NewsGroupPickerActivity"
+            android:name="irdevelopers.asemanweb2.NewsGroupPickerActivity"
             android:label="@string/title_activity_news"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".WebActivity"
+            android:name="irdevelopers.asemanweb2.WebActivity"
             android:label="@string/title_activity_web"
-            android:parentActivityName=".NewsActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.NewsActivity"
             android:screenOrientation="portrait" >
         </activity>
 
-        <service android:name=".CheckForUpdateService" />
+        <service android:name="irdevelopers.asemanweb2.CheckForUpdateService" />
         <service
-            android:name=".NotificationService"
+            android:name="irdevelopers.asemanweb2.NotificationService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".WatchDogNotification"
+            android:name="irdevelopers.asemanweb2.WatchDogNotification"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".WatchDogService"
+            android:name="irdevelopers.asemanweb2.WatchDogService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name="irdevelopers.asemanweb2.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="irdevelopers.asemanweb.MainActivity" />
+                android:value="irdevelopers.asemanweb2.MainActivity" />
         </activity>
         <activity
-            android:name=".TamasBaMaActivity"
+            android:name="irdevelopers.asemanweb2.TamasBaMaActivity"
             android:label="@string/title_activity_tamas_ba_ma"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MainPagesWebActivity"
+            android:name="irdevelopers.asemanweb2.MainPagesWebActivity"
             android:label="@string/title_activity_main_pages_web"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="irdevelopers.asemanweb2.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AllNewsActivity"
+            android:name="irdevelopers.asemanweb2.AllNewsActivity"
             android:label="@string/title_activity_all_news"
-            android:parentActivityName=".NewsGroupPickerActivity" >
+            android:parentActivityName="irdevelopers.asemanweb2.NewsGroupPickerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="irdevelopers.asemanweb.NewsGroupPickerActivity" />
+                android:value="irdevelopers.asemanweb2.NewsGroupPickerActivity" />
         </activity>
     </application>
 

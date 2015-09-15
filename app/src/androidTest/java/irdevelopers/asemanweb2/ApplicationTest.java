@@ -1,4 +1,4 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

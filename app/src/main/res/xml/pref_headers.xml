@@ -2,14 +2,14 @@
 
     <!-- These settings headers are only used on tablets. -->
 
-    <header android:fragment="irdevelopers.asemanweb.SettingsActivity$GeneralPreferenceFragment"
+    <header android:fragment="irdevelopers.asemanweb2.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="irdevelopers.asemanweb.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="irdevelopers.asemanweb2.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
-    <header android:fragment="irdevelopers.asemanweb.SettingsActivity$DataSyncPreferenceFragment"
+    <header android:fragment="irdevelopers.asemanweb2.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" />
 
 </preference-headers>

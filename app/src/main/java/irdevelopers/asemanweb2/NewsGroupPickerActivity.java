@@ -1,11 +1,10 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -13,18 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
@@ -32,10 +24,7 @@ import DataModel.News;
 import Helpers.DatabaseHelper;
 import Helpers.GroupsLoader;
 import Helpers.Ram;
-import Helpers.SharedPrefHelper;
-import Intefaces.CallBackAsync;
 import Intefaces.CallBackGroup;
-import Utilities.Webservice;
 import Views.TextViewFont;
 
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 import Helpers.FontHelper;
-import irdevelopers.asemanweb.MainActivity;
 
 public class TextViewFont extends TextView {
 

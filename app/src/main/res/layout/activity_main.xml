@@ -76,7 +76,7 @@
                         android:id="@+id/menu_tazeha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -84,8 +84,8 @@
 
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
                             android:src="@drawable/tazeha" />
 
@@ -102,15 +102,15 @@
                         android:id="@+id/menu_tejarat_electronic"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical"
                         >
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/tejarat" />
@@ -128,14 +128,14 @@
                         android:id="@+id/menu_soalat_motedavel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
                             android:src="@drawable/soalatmotadavel" />
 
@@ -156,14 +156,14 @@
                         android:id="@+id/menu_sabt_nam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/sabtenam" />
@@ -182,14 +182,14 @@
                         android:id="@+id/menu_tarahi_web"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/tarahiweb" />
@@ -211,14 +211,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/amuzesh" />
@@ -242,14 +242,14 @@
                         android:id="@+id/menu_websiteha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/websiteha" />
@@ -270,14 +270,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/cheraasemanweb" />
@@ -301,14 +301,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/sponser" />
@@ -336,15 +336,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/imageView2"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/darbarema" />
@@ -367,14 +367,14 @@
                         android:id="@+id/menu_tamas_bama"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/tamasbama" />
@@ -397,14 +397,14 @@
                         android:id="@+id/menu_narmafzarha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
                             android:src="@drawable/narmafzarha" />

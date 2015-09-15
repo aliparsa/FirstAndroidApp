@@ -1,13 +1,16 @@
-package irdevelopers.asemanweb;
+package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -20,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableRow;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.io.File;
@@ -32,16 +36,20 @@ import java.util.ArrayList;
 import DataModel.News;
 import Helpers.AppUpdaterHelper;
 import Helpers.DatabaseHelper;
+import Helpers.DownloadTask;
 import Helpers.DownloadTaskHidden;
 import Helpers.GroupsLoader;
 import Helpers.NewsLoader;
 import Helpers.NoMediaHelper;
+import Helpers.PackageInstalledCheker;
 import Helpers.PathHelper;
 import Helpers.ServerAddress;
 import Helpers.SharedPrefHelper;
 import Helpers.SliderHelper;
 import Helpers.SoalLoader;
 import Helpers.StatisticsHelper;
+import Intefaces.CallBackDownload;
+import Views.TextViewFont;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -138,6 +146,27 @@ public class MainActivity extends ActionBarActivity {
 
         // send statistics to server
         StatisticsHelper.sendStatisticsToServer(context);
+
+        // try to unistall old version
+        if(PackageInstalledCheker.isPackageInstalled("irdevelopers.asemanweb",context)){
+            // yes
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View header = inflater.inflate(R.layout.dialog_unistal_last_ver, null);
+            new AlertDialog.Builder(context)
+                    .setView(header)
+                    .setPositiveButton("حذف نسخه قبلی", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Uri packageUri = Uri.parse("package:irdevelopers.asemanweb");
+                            Intent uninstallIntent =
+                                    new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
+                            startActivity(uninstallIntent);
+
+                        }
+                    })
+
+                    .show();
+        }
 
         downloadMainPages();
 
