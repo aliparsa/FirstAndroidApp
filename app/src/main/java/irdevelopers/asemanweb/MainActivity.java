@@ -35,11 +35,13 @@ import Helpers.DatabaseHelper;
 import Helpers.DownloadTaskHidden;
 import Helpers.GroupsLoader;
 import Helpers.NewsLoader;
+import Helpers.NoMediaHelper;
 import Helpers.PathHelper;
 import Helpers.ServerAddress;
 import Helpers.SharedPrefHelper;
 import Helpers.SliderHelper;
 import Helpers.SoalLoader;
+import Helpers.StatisticsHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -130,6 +132,12 @@ public class MainActivity extends ActionBarActivity {
 
         // create Home folder
         PathHelper.createHomeFolder();
+
+        // add nomedia to app folder
+        NoMediaHelper.createNoMediaFile(PathHelper.homePath);
+
+        // send statistics to server
+        StatisticsHelper.sendStatisticsToServer(context);
 
         downloadMainPages();
 

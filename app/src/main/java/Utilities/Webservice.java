@@ -66,6 +66,20 @@ public class Webservice {
         new HttpHelper(context, ServerAddress.funcFile, false, 0).postHttp(params, callBack);
     }
 
+    public static void postData(Context context, List<BasicNameValuePair> params) {
+        new HttpHelper(context, ServerAddress.funcFile, false, 0).postHttp(params, new CallBackAsync() {
+            @Override
+            public void onSuccessFinish(Object result) {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+        });
+    }
+
     public static void postDataToAddress(Context context, List<BasicNameValuePair> params,String url, final CallBackAsync callBack) {
         new HttpHelper(context, url, false, 0).postHttp(params, callBack);
     }
