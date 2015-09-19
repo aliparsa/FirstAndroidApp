@@ -20,6 +20,8 @@
                 android:background="#688e8e8e"
                 android:orientation="vertical">
 
+
+
                 <ProgressBar
                     android:id="@+id/slider_progress"
                     android:layout_width="50dp"
@@ -147,6 +149,8 @@
                             android:text="سوالات متداول"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
+
+
                 </TableRow>
 
                 <TableRow
