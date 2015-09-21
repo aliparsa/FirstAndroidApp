@@ -45,6 +45,9 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         forceRTLIfSupported();
         context = NewsGroupPickerActivity.this;
 
+
+
+
         getSupportActionBar().setTitle("گروه بندی ها");
         getSupportActionBar().setSubtitle("یک گروه را برگزینید");
         //pg = (ProgressBar) findViewById(R.id.progressBarNews);
@@ -142,6 +145,7 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
             }
         });
 
+     //   throw new RuntimeException("error");
 
     }
 

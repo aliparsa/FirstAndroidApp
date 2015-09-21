@@ -13,5 +13,6 @@
     <string name="title_activity_main_pages_web">MainPagesWebActivity</string>
     <string name="title_activity_all_news">همه اخبار</string>
     <string name="MainActivity">Web Sky</string>
+    <string name="toast_crash">خطایی رخ داد. این خطا برای بررسی به سرور ارسال میشود</string>
 
 </resources>
