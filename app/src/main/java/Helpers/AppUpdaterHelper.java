@@ -39,7 +39,10 @@ public class AppUpdaterHelper
     List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
     basicNameValuePairs.add(new BasicNameValuePair("tag", "update"));
 
-    Webservice.postDataToAddress(context, basicNameValuePairs, ServerAddress.funcFile, new CallBackAsync<String>() {
+
+
+
+            Webservice.postDataToAddress(context, basicNameValuePairs, ServerAddress.funcFile, new CallBackAsync<String>() {
 
 
         @Override

@@ -49,6 +49,8 @@ public class NewsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
+
+
         try {
             forceRTLIfSupported();
             context = NewsActivity.this;
