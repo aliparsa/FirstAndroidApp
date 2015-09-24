@@ -52,6 +52,22 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         getSupportActionBar().setSubtitle("یک گروه را برگزینید");
         //pg = (ProgressBar) findViewById(R.id.progressBarNews);
         newslv = (ListView) findViewById(R.id.newsListView);
+
+
+        // set view all news item to listview header
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        header = (RelativeLayout) inflater.inflate(R.layout.item_group, null);
+        TextViewFont textViewFont = (TextViewFont) header.findViewById(R.id.title);
+        textViewFont.setText("همه اخبار");
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AllNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+        newslv.addHeaderView(header);
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -104,7 +120,7 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
                     }
                 }
 
-                adapter=new ListViewObjectAdapter<Group>(context, groups);
+                adapter = new ListViewObjectAdapter<Group>(context, groups);
                 newslv.setAdapter(adapter);
             }
 
@@ -115,19 +131,7 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
         });
 
 
-        // set view all news item to listview header
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        header = (RelativeLayout) inflater.inflate(R.layout.item_group, null);
-        TextViewFont textViewFont = (TextViewFont) header.findViewById(R.id.title);
-        textViewFont.setText("همه اخبار");
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent = new Intent(context,AllNewsActivity.class);
-                startActivity(intent);
-            }
-        });
-        newslv.addHeaderView(header);
+
 
 
         newslv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
