@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,10 +18,12 @@ import android.widget.ProgressBar;
 import java.io.File;
 
 import DataModel.News;
+import Helpers.ActionBarHelper;
 import Helpers.DownloadTaskHidden;
 import Helpers.PathHelper;
 import Helpers.Ram;
 import Helpers.ShareHelper;
+import Intefaces.OnActionBarClickListener;
 
 
 public class WebActivity extends ActionBarActivity {
@@ -41,8 +44,29 @@ public class WebActivity extends ActionBarActivity {
         setContentView(R.layout.activity_web);
         getSupportActionBar().setTitle("بازگشت");
         context = WebActivity.this;
-        forceRTLIfSupported();
+        //forceRTLIfSupported();
 
+        ActionBarHelper.setBackReloadActionbar(context, getSupportActionBar(), "بازگشت", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+                ((Activity) context).finish();
+            }
+
+            @Override
+            public void onReloadPressed() {
+                loadPageOnline();
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+
+            }
+        });
         progressBar = (ProgressBar) findViewById(R.id.progressBar3);
         sharebutton = (ImageView) findViewById(R.id.imageViewShare);
         webView = (WebView) findViewById(R.id.webView);
@@ -133,28 +157,28 @@ public class WebActivity extends ActionBarActivity {
         webView.onPause();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_web, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            loadPageOnline();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_web, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            loadPageOnline();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void loadPageOnline() {
         progressBar.setVisibility(View.VISIBLE);

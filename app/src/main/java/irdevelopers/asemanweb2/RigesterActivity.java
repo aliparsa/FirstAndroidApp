@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,8 +26,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Helpers.ActionBarHelper;
 import Intefaces.CallBackAsync;
+import Intefaces.OnActionBarClickListener;
 import Utilities.Webservice;
+import Views.ButtonFont;
 
 
 public class RigesterActivity extends ActionBarActivity {
@@ -40,15 +44,111 @@ public class RigesterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rigester);
         context = RigesterActivity.this;
-        forceRTLIfSupported();
+       // forceRTLIfSupported();
+
+        ActionBarHelper.setBackActionbar(context, getSupportActionBar(), "صفحه اصلی", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+                ((Activity) context).finish();
+            }
+
+            @Override
+            public void onReloadPressed() {
+
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+
+            }
+        });
+
         getSupportActionBar().setTitle("صفحه اصلی");
 
         // create and fill header
         ImageView headerImageView = (ImageView) findViewById(R.id.imageView);
+        ButtonFont send = (ButtonFont) findViewById(R.id.buttonSend);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         TextView titleTextView = (TextView) findViewById(R.id.titletextView);
 
         titleTextView.setText("ثبت نام");
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText name = (EditText) findViewById(R.id.rig_name);
+                final EditText tel = (EditText) findViewById(R.id.rig_tel);
+                final EditText email = (EditText) findViewById(R.id.rig_email);
+                final Button zamine = (Button) findViewById(R.id.buttonChoiseWork);
+
+
+                if (name.length() < 3) {
+                    Toast.makeText(getApplicationContext(), "نام و نام خانوادگی را بررسی نمایید", Toast.LENGTH_SHORT).show();
+                    name.requestFocus();
+                    return ;
+                }
+                if (tel.length() < 3) {
+                    Toast.makeText(getApplicationContext(), "تلفن را بررسی نمایید", Toast.LENGTH_SHORT).show();
+                    tel.requestFocus();
+                    return ;
+                }
+                if (email.length() < 3) {
+                    Toast.makeText(getApplicationContext(), "ایمیل را بررسی نمایید", Toast.LENGTH_SHORT).show();
+                    email.requestFocus();
+                    return ;
+                }
+                if (ZamineHamkari == -1) {
+                    Toast.makeText(getApplicationContext(), "زمینه همکاری را بررسی نمایید", Toast.LENGTH_SHORT).show();
+                    zamine.requestFocus();
+                    return ;
+                }
+
+
+                List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
+                basicNameValuePairs.add(new BasicNameValuePair("tag", "register"));
+                basicNameValuePairs.add(new BasicNameValuePair("name", name.getText().toString()));
+                basicNameValuePairs.add(new BasicNameValuePair("tel", tel.getText().toString()));
+                basicNameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
+                basicNameValuePairs.add(new BasicNameValuePair("typeCode", ZamineHamkari + ""));
+
+                Toast.makeText(getApplicationContext(), "در حال ارسال...", Toast.LENGTH_SHORT).show();
+
+                Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
+
+
+                    @Override
+                    public void onSuccessFinish(String result) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            if (jsonObject.has("result") && jsonObject.getString("result").equals("ok")) {
+                                Toast.makeText(getApplicationContext(), "اطلاعات شما دریافت شد", Toast.LENGTH_SHORT).show();
+                                name.setText("");
+                                tel.setText("");
+                                email.setText("");
+                                ZamineHamkari = -1;
+                                zamine.setText("انتخاب زمینه همکاری");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "خطایی در برقراری ارتباط رخ داد", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+                        Toast.makeText(getApplicationContext(), "خطایی در برقراری ارتباط رخ داد", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
 
         final Button choiseWorkButton = (Button) findViewById(R.id.buttonChoiseWork);
         choiseWorkButton.setOnClickListener(new View.OnClickListener() {
@@ -77,94 +177,29 @@ public class RigesterActivity extends ActionBarActivity {
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rigester, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_rigester) {
-            final EditText name = (EditText) findViewById(R.id.rig_name);
-            final EditText tel = (EditText) findViewById(R.id.rig_tel);
-            final EditText email = (EditText) findViewById(R.id.rig_email);
-            final Button zamine = (Button) findViewById(R.id.buttonChoiseWork);
-
-
-            if (name.length() < 3) {
-                Toast.makeText(getApplicationContext(), "نام و نام خانوادگی را بررسی نمایید", Toast.LENGTH_SHORT).show();
-                name.requestFocus();
-                return false;
-            }
-            if (tel.length() < 3) {
-                Toast.makeText(getApplicationContext(), "تلفن را بررسی نمایید", Toast.LENGTH_SHORT).show();
-                tel.requestFocus();
-                return false;
-            }
-            if (email.length() < 3) {
-                Toast.makeText(getApplicationContext(), "ایمیل را بررسی نمایید", Toast.LENGTH_SHORT).show();
-                email.requestFocus();
-                return false;
-            }
-            if (ZamineHamkari == -1) {
-                Toast.makeText(getApplicationContext(), "زمینه همکاری را بررسی نمایید", Toast.LENGTH_SHORT).show();
-                zamine.requestFocus();
-                return false;
-            }
-
-
-            List<BasicNameValuePair> basicNameValuePairs = new ArrayList<BasicNameValuePair>();
-            basicNameValuePairs.add(new BasicNameValuePair("tag", "register"));
-            basicNameValuePairs.add(new BasicNameValuePair("name", name.getText().toString()));
-            basicNameValuePairs.add(new BasicNameValuePair("tel", tel.getText().toString()));
-            basicNameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
-            basicNameValuePairs.add(new BasicNameValuePair("typeCode", ZamineHamkari + ""));
-
-            Toast.makeText(getApplicationContext(), "در حال ارسال...", Toast.LENGTH_SHORT).show();
-
-            Webservice.postData(context, basicNameValuePairs, new CallBackAsync<String>() {
-
-
-                @Override
-                public void onSuccessFinish(String result) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(result);
-                        if (jsonObject.has("result") && jsonObject.getString("result").equals("ok")) {
-                            Toast.makeText(getApplicationContext(), "اطلاعات شما دریافت شد", Toast.LENGTH_SHORT).show();
-                            name.setText("");
-                            tel.setText("");
-                            email.setText("");
-                            ZamineHamkari = -1;
-                            zamine.setText("انتخاب زمینه همکاری");
-                        } else {
-                            Toast.makeText(getApplicationContext(), "خطایی در برقراری ارتباط رخ داد", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-                    Toast.makeText(getApplicationContext(), "خطایی در برقراری ارتباط رخ داد", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_rigester, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_rigester) {
+//
+//
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void forceRTLIfSupported() {

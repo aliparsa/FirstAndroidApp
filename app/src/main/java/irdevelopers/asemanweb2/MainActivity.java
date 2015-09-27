@@ -34,6 +34,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 import DataModel.News;
+import Helpers.ActionBarHelper;
 import Helpers.AppUpdaterHelper;
 import Helpers.DatabaseHelper;
 import Helpers.DownloadTask;
@@ -49,6 +50,7 @@ import Helpers.SliderHelper;
 import Helpers.SoalLoader;
 import Helpers.StatisticsHelper;
 import Intefaces.CallBackDownload;
+import Intefaces.OnActionBarClickListener;
 import Views.TextViewFont;
 
 
@@ -120,8 +122,30 @@ public class MainActivity extends ActionBarActivity {
         //start service
 
 
-        forceRTLIfSupported();
+        //forceRTLIfSupported();
         getSupportActionBar().setSubtitle("برترین ارائه دهنده خدمات تجارت الکترونیک");
+
+        ActionBarHelper.setIconSettingActionbar(context, getSupportActionBar(), "آسمان وب", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+
+            }
+
+            @Override
+            public void onReloadPressed() {
+
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+                Intent intent = new Intent(context, SettingsActivity.class);
+                startActivity(intent);            }
+        });
 
 
         slide1 = (ImageView) findViewById(R.id.slide1);
@@ -377,31 +401,31 @@ public class MainActivity extends ActionBarActivity {
         new DownloadTaskHidden(context).execute(ServerAddress.DarbareMaUrl, PathHelper.DarbareMaUrl);
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            Intent intent = new Intent(context, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//
+//            Intent intent = new Intent(context, SettingsActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void forceRTLIfSupported() {

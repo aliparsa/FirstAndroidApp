@@ -9,7 +9,7 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true" />
 
     <Views.TextViewFont
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignTop="@+id/newsImage"
-        android:layout_toEndOf="@+id/newsImage" />
+        android:layout_toLeftOf="@+id/newsImage" />
 
     <Views.TextViewFont
         android:layout_width="wrap_content"

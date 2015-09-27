@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,11 +22,13 @@ import java.util.ArrayList;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.News;
+import Helpers.ActionBarHelper;
 import Helpers.DatabaseHelper;
 import Helpers.NewsLoader;
 import Helpers.Ram;
 import Helpers.ShareHelper;
 import Intefaces.CallBackFinish;
+import Intefaces.OnActionBarClickListener;
 
 public class AllNewsActivity extends ActionBarActivity {
 
@@ -39,7 +42,28 @@ public class AllNewsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_news);
         context = AllNewsActivity.this;
-        forceRTLIfSupported();
+        //forceRTLIfSupported();
+        ActionBarHelper.setBackActionbar(context, getSupportActionBar(), "همه مطالب", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+                ((Activity) context).finish();
+            }
+
+            @Override
+            public void onReloadPressed() {
+
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+
+            }
+        });
         lv = (ListView) findViewById(R.id.listView);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_all_news_swipe_refresh_layout);
 

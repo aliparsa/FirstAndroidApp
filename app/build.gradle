@@ -8,8 +8,8 @@ android {
         applicationId "irdevelopers.asemanweb2"
         minSdkVersion 11
         targetSdkVersion 21
-        versionCode 17
-        versionName "17"
+        versionCode 18
+        versionName "18"
     }
     buildTypes {
         release {

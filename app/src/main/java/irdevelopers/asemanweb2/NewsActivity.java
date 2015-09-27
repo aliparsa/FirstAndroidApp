@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,11 +24,13 @@ import java.util.ArrayList;
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
 import DataModel.News;
+import Helpers.ActionBarHelper;
 import Helpers.DatabaseHelper;
 import Helpers.NewsLoader;
 import Helpers.Ram;
 import Helpers.ShareHelper;
 import Intefaces.CallBackFinish;
+import Intefaces.OnActionBarClickListener;
 
 
 public class NewsActivity extends ActionBarActivity {
@@ -52,7 +55,7 @@ public class NewsActivity extends ActionBarActivity {
 
 
         try {
-            forceRTLIfSupported();
+            //forceRTLIfSupported();
             context = NewsActivity.this;
             group = Ram.group;
 
@@ -60,6 +63,28 @@ public class NewsActivity extends ActionBarActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
+
+            ActionBarHelper.setBackActionbar(context, getSupportActionBar(), group.title, new OnActionBarClickListener() {
+                @Override
+                public void onBackPressed() {
+                    ((Activity) context).finish();
+                }
+
+                @Override
+                public void onReloadPressed() {
+
+                }
+
+                @Override
+                public void onSendPresses() {
+
+                }
+
+                @Override
+                public void onSettingPresses() {
+
+                }
+            });
 
             getSupportActionBar().setTitle(group.title);
             lv = (ListView) findViewById(R.id.mainNewsListView);

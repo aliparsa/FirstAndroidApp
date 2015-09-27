@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 
 import Adapter.ListViewObjectAdapter;
 import DataModel.Soal;
+import Helpers.ActionBarHelper;
 import Helpers.SoalLoader;
 import Intefaces.CallBackSoal;
+import Intefaces.OnActionBarClickListener;
 
 
 public class QuestionsActivity extends ActionBarActivity {
@@ -34,7 +37,30 @@ public class QuestionsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
         context = QuestionsActivity.this;
-        forceRTLIfSupported();
+        //forceRTLIfSupported();
+
+        ActionBarHelper.setBackActionbar(context, getSupportActionBar(), "صفحه اصلی", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+                ((Activity) context).finish();
+            }
+
+            @Override
+            public void onReloadPressed() {
+
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+
+            }
+
+        });
         getSupportActionBar().setTitle("صفحه اصلی");
 
         swipeRefreshLayout= (SwipeRefreshLayout) findViewById(R.id.activity_question_swipe_refresh_layout);

@@ -74,29 +74,28 @@
                     android:id="@+id/firstTableRow"
                     android:background="#FFF">
 
+
                     <LinearLayout
-                        android:id="@+id/menu_tazeha"
+                        android:id="@+id/menu_soalat_motedavel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        >
-
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="85dp"
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
-                            android:src="@drawable/tazeha" />
+                            android:src="@drawable/soalatmotadavel" />
 
                         <Views.TextViewFont
-                            android:id="@+id/button3"
+                            android:id="@+id/buttonQuestion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="7dp"
-                            android:text="خبر ها"
+                            android:layout_margin="7dp"
+                            android:text="سوالات متداول"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
 
@@ -127,28 +126,32 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/menu_soalat_motedavel"
+                        android:id="@+id/menu_tazeha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        >
+
 
                         <ImageView
                             android:layout_width="85dp"
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
-                            android:src="@drawable/soalatmotadavel" />
+                            android:src="@drawable/tazeha" />
 
                         <Views.TextViewFont
-                            android:id="@+id/buttonQuestion"
+                            android:id="@+id/button3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="7dp"
-                            android:text="سوالات متداول"
+                            android:padding="7dp"
+                            android:text="خبر ها"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
+
+
 
 
                 </TableRow>
@@ -156,10 +159,13 @@
                 <TableRow
                     android:background="#FFF">
 
+
+
                     <LinearLayout
-                        android:id="@+id/menu_sabt_nam"
+                        android:id="@+id/menu_amoozesh"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -170,15 +176,16 @@
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
-                            android:src="@drawable/sabtenam" />
+                            android:src="@drawable/amuzesh" />
 
                         <Views.TextViewFont
-                            android:id="@+id/buttonSabtNam"
+                            android:id="@+id/button4"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_margin="7dp"
                             android:layout_weight="1"
-                            android:text="ثبت نام"
+                            android:drawablePadding="-15sp"
+                            android:text="آموزش"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
 
@@ -211,10 +218,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/menu_amoozesh"
+                        android:id="@+id/menu_sabt_nam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -225,27 +231,31 @@
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
-                            android:src="@drawable/amuzesh" />
+                            android:src="@drawable/sabtenam" />
 
                         <Views.TextViewFont
-                            android:id="@+id/button4"
+                            android:id="@+id/buttonSabtNam"
                             android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_margin="7dp"
                             android:layout_weight="1"
-                            android:drawablePadding="-15sp"
-                            android:text="آموزش"
+                            android:text="ثبت نام"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
+
+
+
+
                 </TableRow>
 
                 <TableRow
                     android:background="#FFF">
 
                     <LinearLayout
-                        android:id="@+id/menu_websiteha"
+                        android:id="@+id/menu_espanser"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -256,16 +266,19 @@
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
-                            android:src="@drawable/websiteha" />
+                            android:src="@drawable/sponser" />
 
                         <Views.TextViewFont
-                            android:id="@+id/button7"
+                            android:id="@+id/button9"
                             android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
                             android:layout_margin="7dp"
                             android:layout_weight="0.3"
+
                             android:drawablePadding="-15sp"
-                            android:text="وب سایت ها"
+                            android:text="اسپانسر"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
 
@@ -301,10 +314,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/menu_espanser"
+                        android:id="@+id/menu_websiteha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -315,10 +327,74 @@
                             android:layout_height="85dp"
                             android:background="@android:drawable/dialog_holo_light_frame"
 
-                            android:src="@drawable/sponser" />
+                            android:src="@drawable/websiteha" />
 
                         <Views.TextViewFont
-                            android:id="@+id/button9"
+                            android:id="@+id/button7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_margin="7dp"
+                            android:layout_weight="0.3"
+                            android:drawablePadding="-15sp"
+                            android:text="وب سایت ها"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+
+
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#FFF">
+
+
+
+                    <LinearLayout
+                        android:id="@+id/menu_narmafzarha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
+                            android:background="@android:drawable/dialog_holo_light_frame"
+
+                            android:src="@drawable/narmafzarha" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="7dp"
+                            android:layout_weight="0.3"
+                            android:drawablePadding="-15sp"
+                            android:text="نرم افزار ها"
+                            android:textSize="@dimen/main_menu_text_size" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/menu_tamas_bama"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="85dp"
+                            android:layout_height="85dp"
+                            android:background="@android:drawable/dialog_holo_light_frame"
+
+                            android:src="@drawable/tamasbama" />
+
+                        <Views.TextViewFont
+                            android:id="@+id/button11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
@@ -327,13 +403,9 @@
                             android:layout_weight="0.3"
 
                             android:drawablePadding="-15sp"
-                            android:text="اسپانسر"
+                            android:text="تماس با ما"
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:background="#FFF">
 
                     <LinearLayout
                         android:id="@+id/menu_darbareye_ma"
@@ -367,64 +439,7 @@
                             android:textSize="@dimen/main_menu_text_size" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/menu_tamas_bama"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:background="@android:drawable/dialog_holo_light_frame"
-
-                            android:src="@drawable/tamasbama" />
-
-                        <Views.TextViewFont
-                            android:id="@+id/button11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_margin="7dp"
-                            android:layout_weight="0.3"
-
-                            android:drawablePadding="-15sp"
-                            android:text="تماس با ما"
-                            android:textSize="@dimen/main_menu_text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/menu_narmafzarha"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:background="@android:drawable/dialog_holo_light_frame"
-
-                            android:src="@drawable/narmafzarha" />
-
-                        <Views.TextViewFont
-                            android:id="@+id/button12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_margin="7dp"
-                            android:layout_weight="0.3"
-                            android:drawablePadding="-15sp"
-                            android:text="نرم افزار ها"
-                            android:textSize="@dimen/main_menu_text_size" />
-                    </LinearLayout>
                 </TableRow>
 
             </TableLayout>

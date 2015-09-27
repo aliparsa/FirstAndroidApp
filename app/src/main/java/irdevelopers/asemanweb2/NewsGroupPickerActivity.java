@@ -1,6 +1,7 @@
 package irdevelopers.asemanweb2;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -21,10 +22,12 @@ import java.util.ArrayList;
 import Adapter.ListViewObjectAdapter;
 import DataModel.Group;
 import DataModel.News;
+import Helpers.ActionBarHelper;
 import Helpers.DatabaseHelper;
 import Helpers.GroupsLoader;
 import Helpers.Ram;
 import Intefaces.CallBackGroup;
+import Intefaces.OnActionBarClickListener;
 import Views.TextViewFont;
 
 
@@ -42,14 +45,35 @@ public class NewsGroupPickerActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_group_picker);
-        forceRTLIfSupported();
+        //forceRTLIfSupported();
         context = NewsGroupPickerActivity.this;
 
 
+        ActionBarHelper.setBackActionbar(context, getSupportActionBar(), "گروه بندی ها", new OnActionBarClickListener() {
+            @Override
+            public void onBackPressed() {
+                ((Activity) context).finish();
+            }
 
+            @Override
+            public void onReloadPressed() {
 
-        getSupportActionBar().setTitle("گروه بندی ها");
-        getSupportActionBar().setSubtitle("یک گروه را برگزینید");
+            }
+
+            @Override
+            public void onSendPresses() {
+
+            }
+
+            @Override
+            public void onSettingPresses() {
+
+            }
+
+        });
+
+        //getSupportActionBar().setTitle("گروه بندی ها");
+       // getSupportActionBar().setSubtitle("یک گروه را برگزینید");
         //pg = (ProgressBar) findViewById(R.id.progressBarNews);
         newslv = (ListView) findViewById(R.id.newsListView);
 
